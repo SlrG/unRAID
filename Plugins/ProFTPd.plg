@@ -1,24 +1,26 @@
 <?xml version='1.0' standalone='yes'?>
 
 <!DOCTYPE PLUGIN [
-	<!ENTITY name			"ProFTPd">
+	<!ENTITY name				"ProFTPd">
 	<!ENTITY displayName		"ProFTPd">
-	<!ENTITY author			"SlrG">
-	<!ENTITY authorName		"Michael Wehr">
-	<!ENTITY plgVersion		"2015.03.10.1">
-	<!ENTITY ghm 			"https://github.com/&author;/unRAID/raw/master">
-	<!ENTITY pluginURL		"&ghm;/Plugins/&name;.plg">
+	<!ENTITY author				"SlrG">
+	<!ENTITY authorName			"Michael Wehr">
+	<!ENTITY plgVersion			"2015.03.10.1">
+	<!ENTITY pld				"/boot/config/plugins">
+	<!ENTITY plg				"&pld;/&name;">
+	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
+	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
 	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
-	<!ENTITY controlMD5		"5e59d1709fdd211a2caaf0e746bc3c71">
-	<!ENTITY controlURL		"&ghm;/AppSupport/&name;/&controlFILE;">
+	<!ENTITY controlMD5			"5e59d1709fdd211a2caaf0e746bc3c71">
+	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"4c480980020834c5f059bc11f22aea5a">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
 	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.0_x64.tar.gz">
 	<!ENTITY dependencyMD564	"3566e714aacfb04e352f38610b2ccf04">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
-	<!ENTITY appURL			"http://www.proftpd.org/">
-	<!ENTITY commonDIR		"/usr/local/&author;-Common">
+	<!ENTITY appURL				"http://www.proftpd.org/">
+	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
 
 <PLUGIN
@@ -40,7 +42,7 @@ All dependencies are installed as needed and everything is controllable from the
 Version History
 =========================================================================
 
-2015-03-10 - version 1.0  	: Re-written based on PhAzEs v2 plugins to run with Unraid 6 Plugin Manager
+2015-03-10 - version 1.0	: Re-written based on PhAzEs v2 plugins to run with Unraid 6 Plugin Manager
 PhAzE Comments:
 		- Universal based plugin now downloads appropriate depedencies based on the OS architeture used
 		- Installs from USB copy if no internet connection is found and files exist on USB
@@ -52,23 +54,23 @@ PhAzE Comments:
 		- When plugin is uninstalled from PLGMGR or plugin GUI all files even dependencies are removed
 		- Plugin uninstall leaves installdir and configdir, up to user to delete those if they are not needed
 
-2013-12-28 - version 0.5k 	: Removed SimpleFeatures recognition and added manual webserver configuration.
-2013-11-13 - version 0.5j 	: Added scripts to mount directories on array start and unmount them on array stop.
-2013-11-13 - version 0.5i 	: Fixed refresh of control panel plugin by adding sudo -u root to restart of inetd.
-2013-11-08 - version 0.5h 	: Downgraded openssl to 0.9.8n because 1.0.1c was creating problems with other plugins using the older version. (Thanks Madhouse!)
-2013-07-17 - version 0.5g 	: Fixed problem that slashes were removed from proftpd.conf on save and removed unnecessary sudo commands. (Thanks Necrotic!)
-2013-05-28 - version 0.5f 	: Move binary files from github to personal webspace and change version check.
-2013-05-28 - version 0.5e 	: Fixed openssl dependency.
-2013-05-27 - version 0.5d 	: Fixed error message when no SimpleFeatures webserver is installed.
-2013-05-23 - version 0.5c 	: Change of wordings.
-2013-05-23 - version 0.5b 	: Disable FTP Server icon of unRAIDs internal ftp server. (Thanks saary!)
-2013-05-23 - version 0.5a 	: Fixed stupid bug that blocked the downloading of files from the github repo. (Thanks saary!)
-2013-04-04 - version 0.5  	: Added syntax checking and line numbering to config file editor.
-2013-03-29 - version 0.4  	: Update functionality for plugin (Thanks overbyrn!).
-2013-03-23 - version 0.3  	: Provide config editor in iframe if simplefeatures webserver is available.
-2013-02-08 - version 0.2  	: Check if sql is installed and choose proftpd package accordingly.
-2013-02-02 - version 0.1a 	: Enable download of iconfiles if not yet present. (Thanks overbyrn!)
-2013-02-01 - version 0.1  	: First release
+2013-12-28 - version 0.5k	: Removed SimpleFeatures recognition and added manual webserver configuration.
+2013-11-13 - version 0.5j	: Added scripts to mount directories on array start and unmount them on array stop.
+2013-11-13 - version 0.5i	: Fixed refresh of control panel plugin by adding sudo -u root to restart of inetd.
+2013-11-08 - version 0.5h	: Downgraded openssl to 0.9.8n because 1.0.1c was creating problems with other plugins using the older version. (Thanks Madhouse!)
+2013-07-17 - version 0.5g	: Fixed problem that slashes were removed from proftpd.conf on save and removed unnecessary sudo commands. (Thanks Necrotic!)
+2013-05-28 - version 0.5f	: Move binary files from github to personal webspace and change version check.
+2013-05-28 - version 0.5e	: Fixed openssl dependency.
+2013-05-27 - version 0.5d	: Fixed error message when no SimpleFeatures webserver is installed.
+2013-05-23 - version 0.5c	: Change of wordings.
+2013-05-23 - version 0.5b	: Disable FTP Server icon of unRAIDs internal ftp server. (Thanks saary!)
+2013-05-23 - version 0.5a	: Fixed stupid bug that blocked the downloading of files from the github repo. (Thanks saary!)
+2013-04-04 - version 0.5	: Added syntax checking and line numbering to config file editor.
+2013-03-29 - version 0.4	: Update functionality for plugin (Thanks overbyrn!).
+2013-03-23 - version 0.3	: Provide config editor in iframe if simplefeatures webserver is available.
+2013-02-08 - version 0.2	: Check if sql is installed and choose proftpd package accordingly.
+2013-02-02 - version 0.1a	: Enable download of iconfiles if not yet present. (Thanks overbyrn!)
+2013-02-01 - version 0.1	: First release
 
 =========================================================================
 List of files created by this plugin
@@ -76,39 +78,39 @@ List of files created by this plugin
 
 INSTALLED TO: /boot/config/plugins/ProFTPd
 
-mountscript.sh                      	-> This is used to mount directories on array start
-ProFTPd-PhAzE-Control.tar.gz		-> This holds the plugin files
-ProFTPd.cfg				-> The config file used by the plugin
-ProFTPd-PhAzE-Support.tar.gz		-> This holds the plugins dependency files
-ProFTPd.conf                        	-> The config file used by proftpd
-ProFTPdce.zip                       	-> This holds the proftpd config editor files
-unmountscript.sh                    	-> This is used to unmoung directories on array stop
+mountscript.sh					-> This is used to mount directories on array start
+ProFTPd-PhAzE-Control.tar.gz	-> This holds the plugin files
+ProFTPd.cfg						-> The config file used by the plugin
+ProFTPd-PhAzE-Support.tar.gz	-> This holds the plugins dependency files
+ProFTPd.conf					-> The config file used by proftpd
+ProFTPdce.zip					-> This holds the proftpd config editor files
+unmountscript.sh				-> This is used to unmoung directories on array stop
 
 INSTALLED TO: $Webroot (if set)
-..					-> The proftpd config editor files
+..								-> The proftpd config editor files
 
 INSTALLED TO: /usr/local/emhttp/plugins/ProFTPd
 
-ProFTPd.page				-> This page points to the PHP file for the plugin GUI
-ProFTPd.css				-> This is some added CSS to keep the look and feel of the plugins across unraid versions
-ProFTPd.php				-> This is the PHP page for the plugin settings GUI
-ProFTPd.png				-> This is the applications icon
-device_status.png			-> This is an icon used in the settings page
-new_config.png				-> This is an icon used in the settings page
-information.png				-> This is an icon used in the settings page
-paypal.png				-> This is an image used in the settings page
-README.md				-> This is a text file that describes the application
-event/disks_mounted			-> Starts the application when the array is mounted
+ProFTPd.page					-> This page points to the PHP file for the plugin GUI
+ProFTPd.css						-> This is some added CSS to keep the look and feel of the plugins across unraid versions
+ProFTPd.php						-> This is the PHP page for the plugin settings GUI
+ProFTPd.png						-> This is the applications icon
+device_status.png				-> This is an icon used in the settings page
+new_config.png					-> This is an icon used in the settings page
+information.png					-> This is an icon used in the settings page
+paypal.png						-> This is an image used in the settings page
+README.md						-> This is a text file that describes the application
+event/disks_mounted				-> Starts the application when the array is mounted
 event/unmounting_disks			-> Stops the application when the array is unmounted
 
 INSTALLED TO: /etc/rc.d
 
-rc.ProFTPd				-> This is the control file. The one that starts, stops, and installs the application
+rc.ProFTPd						-> This is the control file. The one that starts, stops, and installs the application
 
 INSTALLED TO: /usr/local/SlrG-Common/ProFTPd
 
-startcfg.sh				-> This is a script that exports environment variables on app start, created on app install
-All dependency files 			-> These are binaries and apps that are required to run the application
+startcfg.sh						-> This is a script that exports environment variables on app start, created on app install
+All dependency files			-> These are binaries and apps that are required to run the application
 -->
 
 
@@ -142,19 +144,19 @@ fi
 echo "Cleaning up previous install files..."
 # delete file but don't warn if file does not exist
 rmNoWarn() {
-  test -e $1 &amp;&amp; rm $1 2>/dev/null
+	test -e $1 &amp;&amp; rm $1 2>/dev/null
 }
 
 # delete directory but don't warn if directory does not exist
 rmRecursiveNoWarn() {
-  test -e $1 &amp;&amp; rm -r $1 2>/dev/null
+	test -e $1 &amp;&amp; rm -r $1 2>/dev/null
 }
 
 #One-time remove of legacy packages from previous ProFTPd plugin versions
 #Selfremoval commands
 echo
 echo "Executing selfremoval commands if present..."
-#rmNoWarn &plg;/filename; sed -i '/#srmtag00001/d' &pld;/filename        		# Example for selfremoval commands
+#rmNoWarn &plg;/filename; sed -i '/#srmtag00001/d' &pld;/&name;.plg		# Example for selfremoval commands
 
 # Verifies plugin control files if they exist, deletes if they are incorrect so new ones can be downloaded
 if [ -f "$CTRLFILES" ]; then
