@@ -282,12 +282,6 @@ fi
 [ ! `cat "$CFGFILE" | grep WPORT` ] &amp;&amp; echo "WPORT=\"\"" &gt;&gt; "$CFGFILE"
 [ ! `cat "$CFGFILE" | grep CHECKONLINE` ] &amp;&amp; echo "CHECKONLINE=\"yes\"" &gt;&gt; "$CFGFILE"
 
-# Force update REPO if it has changed from old plugin versions but only if old one was found
-TESTREPO=`cat "$CFGFILE" | grep 'REPO=' | sed -n 's!REPO="\(.*\)"!\1!p'`
-[ "$TESTREPO" == "" ] &amp;&amp; sed -i "s!REPO=\".*\"!REPO=\"&appURL;\"!g" "$CFGFILE"
-sed -i 's!\r!!g' "$CFGFILE"
-echo -e "\t Plugin config file verified"
-
 # Extract and install the plugin support files from the tar.gz file
 echo -e "\t Installing plugin control files"
 if [ -f "$CTRLFILES" ]; then
