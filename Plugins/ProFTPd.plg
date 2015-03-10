@@ -1,0 +1,389 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+	<!ENTITY name				"ProFTPd">
+	<!ENTITY displayName		"ProFTPd">
+	<!ENTITY author				"SlrG">
+	<!ENTITY authorName			"Michael Wehr">
+	<!ENTITY plgVersion			"2015.03.10.1">
+	<!ENTITY ghm 				"https://github.com/&author;/unRAID/raw/master">
+	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
+	<!ENTITY controlMD5			"5e59d1709fdd211a2caaf0e746bc3c71">
+	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
+	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
+	<!ENTITY dependencyMD5		"4c480980020834c5f059bc11f22aea5a">
+	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
+	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.0_x64.tar.gz">
+	<!ENTITY dependencyMD564	"3566e714aacfb04e352f38610b2ccf04">
+	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
+	<!ENTITY appURL				"http://www.proftpd.org/">
+	<!ENTITY commonDIR			"/usr/local/&author;-Common">
+]>
+
+<PLUGIN
+	name="&name;"
+	author="&author;"
+	version="&plgVersion;"
+	pluginURL="&pluginURL;"
+>
+
+<!--
+=========================================================================
+Description
+=========================================================================
+
+This Plugin installs and controls ProFTPd for UnRaid.
+All dependencies are installed as needed and everything is controllable from the webgui.
+
+=========================================================================
+Version History
+=========================================================================
+
+2015-03-10 - version 1.0  	: Re-written based on PhAzEs v2 plugins to run with Unraid 6 Plugin Manager
+PhAzE Comments:
+		- Universal based plugin now downloads appropriate depedencies based on the OS architeture used
+		- Installs from USB copy if no internet connection is found and files exist on USB
+		- Added GUI setting to disable online checks by the plugin on page load
+		- Added dependency section to view main dependency versions and very they are working
+		- Added ability to uninstall the plugin and files from within the plugin GUI
+		- Dependencies now install to a common folder and app starts with a wrapper script
+		- Wrapper script adds environment variables for the common dependency folder upon start
+		- When plugin is uninstalled from PLGMGR or plugin GUI all files even dependencies are removed
+		- Plugin uninstall leaves installdir and configdir, up to user to delete those if they are not needed
+
+2013-12-28 - version 0.5k 	: Removed SimpleFeatures recognition and added manual webserver configuration.
+2013-11-13 - version 0.5j 	: Added scripts to mount directories on array start and unmount them on array stop.
+2013-11-13 - version 0.5i 	: Fixed refresh of control panel plugin by adding sudo -u root to restart of inetd.
+2013-11-08 - version 0.5h 	: Downgraded openssl to 0.9.8n because 1.0.1c was creating problems with other plugins using the older version. (Thanks Madhouse!)
+2013-07-17 - version 0.5g 	: Fixed problem that slashes were removed from proftpd.conf on save and removed unnecessary sudo commands. (Thanks Necrotic!)
+2013-05-28 - version 0.5f 	: Move binary files from github to personal webspace and change version check.
+2013-05-28 - version 0.5e 	: Fixed openssl dependency.
+2013-05-27 - version 0.5d 	: Fixed error message when no SimpleFeatures webserver is installed.
+2013-05-23 - version 0.5c 	: Change of wordings.
+2013-05-23 - version 0.5b 	: Disable FTP Server icon of unRAIDs internal ftp server. (Thanks saary!)
+2013-05-23 - version 0.5a 	: Fixed stupid bug that blocked the downloading of files from the github repo. (Thanks saary!)
+2013-04-04 - version 0.5  	: Added syntax checking and line numbering to config file editor.
+2013-03-29 - version 0.4  	: Update functionality for plugin (Thanks overbyrn!).
+2013-03-23 - version 0.3  	: Provide config editor in iframe if simplefeatures webserver is available.
+2013-02-08 - version 0.2  	: Check if sql is installed and choose proftpd package accordingly.
+2013-02-02 - version 0.1a 	: Enable download of iconfiles if not yet present. (Thanks overbyrn!)
+2013-02-01 - version 0.1  	: First release
+
+=========================================================================
+List of files created by this plugin
+=========================================================================
+
+INSTALLED TO: /boot/config/plugins/ProFTPd
+
+mountscript.sh                      -> This is used to mount directories on array start
+ProFTPd-PhAzE-Control.tar.gz		-> This holds the plugin files
+ProFTPd.cfg							-> The config file used by the plugin
+ProFTPd-PhAzE-Support.tar.gz		-> This holds the plugins dependency files
+ProFTPd.conf                        -> The config file used by proftpd
+ProFTPdce.zip                       -> This holds the proftpd config editor files
+unmountscript.sh                    -> This is used to unmoung directories on array stop
+
+INSTALLED TO: $Webroot (if set)
+...									-> The proftpd config editor files
+
+INSTALLED TO: /usr/local/emhttp/plugins/ProFTPd
+
+ProFTPd.page						-> This page points to the PHP file for the plugin GUI
+ProFTPd.css							-> This is some added CSS to keep the look and feel of the plugins across unraid versions
+ProFTPd.php							-> This is the PHP page for the plugin settings GUI
+ProFTPd.png							-> This is the applications icon
+device_status.png					-> This is an icon used in the settings page
+new_config.png						-> This is an icon used in the settings page
+information.png						-> This is an icon used in the settings page
+paypal.png							-> This is an image used in the settings page
+README.md							-> This is a text file that describes the application
+event/disks_mounted					-> Starts the application when the array is mounted
+event/unmounting_disks				-> Stops the application when the array is unmounted
+
+INSTALLED TO: /etc/rc.d
+
+rc.ProFTPd							-> This is the control file. The one that starts, stops, and installs the application
+
+INSTALLED TO: /usr/local/SlrG-Common/ProFTPd
+
+startcfg.sh							-> This is a script that exports environment variables on app start, created on app install
+All dependency files 				-> These are binaries and apps that are required to run the application
+-->
+
+
+
+<FILE Name="/tmp/&name;-script" Run="/bin/bash">
+<INLINE>
+# =========================================================================
+# Clean up previous files that don't match the known md5
+# =========================================================================
+
+# Setup plugin variables
+CTRLFILES="/boot/config/plugins/&name;/&controlFILE;"
+CFGFILE="/boot/config/plugins/&name;/&name;.cfg"
+OLDPNG="proftpd.png"
+OLDNAME="proftpd"
+
+# Since this is a universal plugin for unraid, check if running 32 bit or 64 bit OS for dependencies
+ARCHTYPE=$( /usr/bin/uname -m )
+if [ "x86_64" == "$ARCHTYPE" ]; then
+	DEPFILES="/boot/config/plugins/&name;/&dependencyFILE64;"
+	DEPMD5="&dependencyMD564;"
+	DEPURL="&dependencyURL64;"
+else
+	DEPFILES="/boot/config/plugins/&name;/&dependencyFILE;"
+	DEPMD5="&dependencyMD5;"
+	DEPURL="&dependencyURL;"
+	echo " " # This makes unraid 5 console a little cleaner
+fi
+
+# Backwards compatibility from older plugin versions
+echo "Cleaning up previous install files..."
+# delete file but don't warn if file does not exist
+rmNoWarn() {
+  test -e $1 &amp;&amp; rm $1 2>/dev/null
+}
+
+# delete directory but don't warn if directory does not exist
+rmRecursiveNoWarn() {
+  test -e $1 &amp;&amp; rm -r $1 2>/dev/null
+}
+
+#One-time remove of legacy packages from previous ProFTPd plugin versions
+#Selfremoval commands
+echo
+echo "Executing selfremoval commands if present..."
+#rmNoWarn &plg;/filename; sed -i '/#srmtag00001/d' &pld;/filename        		# Example for selfremoval commands
+
+# Verifies plugin control files if they exist, deletes if they are incorrect so new ones can be downloaded
+if [ -f "$CTRLFILES" ]; then
+	MD5TEST=`echo "&controlMD5;  $CTRLFILES" | md5sum --quiet --status -c - &amp;&amp; echo "1" || echo "0"`
+	if [ "$MD5TEST" == "0" ]; then
+		echo -e "\t Found wrong version of plugin control files. Deleting"
+		rm -f "$CTRLFILES"
+	else
+		echo -e "\t Found correct version of plugin control files. Ignoring"
+	fi
+fi
+
+# Verifies plugin dependency files if they exist, deletes if they are incorrect so new ones can be downloaded
+if [ -f "$DEPFILES" ]; then
+	MD5TEST=`echo "$DEPMD5  $DEPFILES" | md5sum --quiet --status -c - &amp;&amp; echo "1" || echo "0"`
+	if [ "$MD5TEST" == "0" ]; then
+		echo -e "\t Found wrong version of plugin dependency files. Deleting"
+		rm -f "$DEPFILES"
+	else
+		echo -e "\t Found correct version of plugin dependency files. Ignoring"
+	fi
+fi
+
+# Remove previous temp install directory if found
+[ -d /tmp/&name;-inst ] &amp;&amp; rm -fR /tmp/&name;-inst;
+
+echo "...Cleanup complete!"
+
+# =========================================================================
+# Download required plugin files
+# =========================================================================
+
+echo "Downloading any missing plugin files..."
+
+# Check for net connectivity to the repo, 5 second timeout then fails
+NETCHECK=`timeout 5 wget --no-check-certificate -qST4 --spider "https://github.com/&author;" 2>&amp;1 | grep HTTP | tail -1 | cut -f1 | awk '{print $NF}'`
+if [ "$NETCHECK" == "OK" ]; then
+	HASNET="yes"
+else
+	HASNET="no"
+fi
+
+# Downloads plugin control files if they don't exist, then verify them
+if [ ! -f "$CTRLFILES" ]; then
+	echo -e "\t Latest plugin control files downloading"
+	if [ "$HASNET" == "yes" ]; then
+		mkdir -p "/boot/config/plugins/&name;"
+		wget --no-check-certificate -qO "$CTRLFILES" "&controlURL;"
+		if [ -f "$CTRLFILES" ]; then
+			MD5TEST1=`echo "&controlMD5;  $CTRLFILES" | md5sum --quiet --status -c - &amp;&amp; echo "1" || echo "0"`
+			if [ "$MD5TEST1" == "1" ]; then
+				echo -e "\t Plugin control files have passed MD5 check"
+			else
+				echo "...Downloaded plugin control files have failed MD5 check. Deleting and aborting install"
+				rm -f "$CTRLFILES"
+				rm -f "/tmp/&name;-script"
+				exit 1
+			fi
+		else
+			echo "...Unable to download missing plugin control files. Aborting install"
+			rm -f "/tmp/&name;-script"
+			exit 1
+		fi
+	else
+		echo "...Unable to download missing plugin control files. Aborting install"
+		rm -f "/tmp/&name;-script"
+		exit 1
+	fi
+fi
+
+# Downloads plugin dependency files if they don't exist, then verify them
+if [ ! -f "$DEPFILES" ] &amp;&amp; [ "$DEPMD5" != "" ]; then
+	echo -e "\t Latest plugin dependency files downloading"
+	if [ "$HASNET" == "yes" ]; then
+		mkdir -p /boot/config/plugins/&name;
+		wget --no-check-certificate -qO "$DEPFILES" "$DEPURL"
+		if [ -f "$DEPFILES" ]; then
+			MD5TEST2=`echo "$DEPMD5  $DEPFILES" | md5sum --quiet --status -c - &amp;&amp; echo "1" || echo "0"`
+			if [ "$MD5TEST2" == "1" ]; then
+				echo -e "\t Plugin dependency files have passed MD5 check"
+			else
+				echo "...Downloaded plugin dependency files have failed MD5 check. Deleting and aborting install"
+				rm -f "$DEPFILES"
+				rm -f "/tmp/&name;-script"
+				exit 1
+			fi
+		else
+			echo "...Unable to download missing plugin dependency files. Aborting install"
+			rm -f "/tmp/&name;-script"
+			exit 1
+		fi
+	else
+		echo "...Unable to download missing plugin dependency files. Aborting install"
+		rm -f "/tmp/&name;-script"
+		exit 1
+	fi
+fi
+
+# Removes other packages that don't match the version required, leaves out the proper ones if they exist
+find /boot/config/plugins/&name;/&name;-&author;-Control* -type f -not -name "&controlFILE;" 2> /dev/null | xargs rm 2> /dev/null
+if [ "x86_64" == "$ARCHTYPE" ]; then
+	find /boot/config/plugins/&name;/&name;-&author;-Dependency* -type f -not -name "&dependencyFILE64;" 2> /dev/null | xargs rm 2> /dev/null
+else
+	find /boot/config/plugins/&name;/&name;-&author;-Dependency* -type f -not -name "&dependencyFILE;" 2> /dev/null | xargs rm 2> /dev/null
+fi
+
+echo "...Downloading complete!"
+
+# ==============================================
+# The 'install' script
+# ==============================================
+
+echo "Running install script for &displayName;..."
+
+# Verify the elements in the plugin default config file, add any that are missing
+if [ ! -f "$CFGFILE" ]; then
+	mkdir -p "/boot/config/plugins/&name;"
+	echo -e "\t No default config file found. Creating"
+	echo "# &displayName; configuration:" &gt; "$CFGFILE"
+fi
+[ ! `cat "$CFGFILE" | grep SERVICE` ] &amp;&amp; echo "SERVICE=\"disable\"" &gt;&gt; "$CFGFILE"
+[ ! `cat "$CFGFILE" | grep RUNAS` ] &amp;&amp; echo "RUNAS=\"nobody\"" &gt;&gt; "$CFGFILE"
+[ ! `cat "$CFGFILE" | grep WEBSRV` ] &amp;&amp; echo "WEBSRV=\"disable\"" &gt;&gt; "$CFGFILE"
+[ ! `cat "$CFGFILE" | grep WPATH` ] &amp;&amp; echo "WPATH=\"\"" &gt;&gt; "$CFGFILE"
+[ ! `cat "$CFGFILE" | grep WPORT` ] &amp;&amp; echo "WPORT=\"\"" &gt;&gt; "$CFGFILE"
+[ ! `cat "$CFGFILE" | grep CHECKONLINE` ] &amp;&amp; echo "CHECKONLINE=\"yes\"" &gt;&gt; "$CFGFILE"
+
+# Force update REPO if it has changed from old plugin versions but only if old one was found
+TESTREPO=`cat "$CFGFILE" | grep 'REPO=' | sed -n 's!REPO="\(.*\)"!\1!p'`
+[ "$TESTREPO" == "" ] &amp;&amp; sed -i "s!REPO=\".*\"!REPO=\"&appURL;\"!g" "$CFGFILE"
+sed -i 's!\r!!g' "$CFGFILE"
+echo -e "\t Plugin config file verified"
+
+# Extract and install the plugin support files from the tar.gz file
+echo -e "\t Installing plugin control files"
+if [ -f "$CTRLFILES" ]; then
+	mkdir -p "/tmp/&name;-inst/install-A"
+	TEMP1="/tmp/&name;-inst/install-A/usr/local/emhttp/plugins/&name;"
+	tar -xf "$CTRLFILES" -C "/tmp/&name;-inst/install-A"
+	if [ "x86_64" == "$ARCHTYPE" ]; then
+		echo "---" &gt;&gt; "${TEMP1}/&name;.page"
+		echo "&lt;?php include '/usr/local/emhttp/plugins/&name;/styles/&name;6.css';?&gt;" &gt;&gt; "${TEMP1}/&name;.page"
+		echo "&lt;?php include '/usr/local/emhttp/plugins/&name;/include/&name;.php';?&gt;" &gt;&gt; "${TEMP1}/&name;.page"
+	else
+		echo "&lt;?php include '/usr/local/emhttp/plugins/&name;/styles/&name;5.css';?&gt;" &gt; "${TEMP1}/&name;.php"
+		echo "&lt;?php include '/usr/local/emhttp/plugins/&name;/include/&name;.php';?&gt;" &gt;&gt; "${TEMP1}/&name;.php"
+	fi
+	cp -Raf "/tmp/&name;-inst/install-A/." /
+else
+	echo "...Install failed, no plugin control files located. Exiting"
+	rm -f "/tmp/&name;-script"
+	exit 1
+fi
+
+# Extract and install the plugin dependency files from the tar.gz file
+if [ "$DEPMD5" != "" ]; then
+	echo -e "\t Installing plugin dependency files"
+	if [ -f "$DEPFILES" ]; then
+		mkdir -p "/tmp/&name;-inst/install-B"
+		[ ! -d "&commonDIR;/var/log/setup/tmp" ] &amp;&amp; mkdir -p "&commonDIR;/var/log/setup/tmp"
+		tar -xf "$DEPFILES" -C "/tmp/&name;-inst/install-B"
+		ROOT="&commonDIR;" upgradepkg --install-new /tmp/&name;-inst/install-B/*
+		if [ ! -f "/usr/share/curl/ca-bundle.crt" ] &amp;&amp; [ -f "&commonDIR;/usr/share/curl/ca-bundle.crt" ]; then
+			mkdir -p "/usr/share/curl"
+			cp -f "&commonDIR;/usr/share/curl/ca-bundle.crt" "/usr/share/curl/ca-bundle.crt"
+		fi
+	else
+		echo "...Install failed, no plugin dependency files located. Exiting"
+		rm -f "/tmp/&name;-script"
+		exit 1
+	fi
+fi
+
+# Correct any ^M (Windows carriage characters) in the important files
+[ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; sed -i 's!\r!!g' "/etc/rc.d/rc.&name;"
+[ -d "/usr/local/emhttp/plugins/&name;/event" ] &amp;&amp; sed -i 's!\r!!g' /usr/local/emhttp/plugins/&name;/event/*
+
+# Create or update the export file
+[ ! -d "&commonDIR;/&name;" ] &amp;&amp; mkdir -p "&commonDIR;/&name;"
+/etc/rc.d/rc.&name; writeexport
+[ -f "&commonDIR;/&name;/startcfg.sh" ] &amp;&amp; sed -i 's!\r!!g' "&commonDIR;/&name;/startcfg.sh"
+
+# Remove the temp install folder
+echo -e "\t Cleaning up temp files/folders"
+rm -Rf "/tmp/&name;-inst"
+
+echo "...Install complete!"
+
+rm -f "/tmp/&name;-script"
+</INLINE>
+</FILE>
+
+
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# ==============================================
+# The 'remove' script
+# ==============================================
+
+echo "Uninstalling $displayName; plugin..."
+sleep 1
+
+# Stop the app if the control file exists
+if [ -f "/etc/rc.d/rc.&name;" ]; then
+	/etc/rc.d/rc.&name; stop
+fi
+sleep 1
+
+# Get the arch type to see what version of unraid is running
+ARCHTYPE=$( /usr/bin/uname -m )
+
+# Remove all files and directories pertaining to this plugin
+[ -d "&commonDIR;/&name;" ] &amp;&amp; rm -fR "&commonDIR;/&name;"
+if [ "$(find &commonDIR; -type f | grep startcfg.sh | wc -l 2> /dev/null)" == "0" ]; then
+	rm -Rf "&commonDIR;"
+fi
+[ -d "/usr/local/emhttp/plugins/&name;" ] &amp;&amp; rm -fR "/usr/local/emhttp/plugins/&name;"
+[ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; rm -f "/etc/rc.d/rc.&name;"
+[ -e "/var/log/plugins/&name;.plg" ] &amp;&amp; rm -f "/var/log/plugins/&name;.plg"
+[ -d "/boot/config/plugins/&name;" ] &amp;&amp; rm -fR "/boot/config/plugins/&name;"
+[ -f "/boot/config/plugins/&name;.plg.old" ] &amp;&amp; rm -f "/boot/config/plugins/&name;.plg.old"
+if [ "x86_64" != "$ARCHTYPE" ]; then
+	[ -f "/boot/config/plugins/&name;.plg" ] &amp;&amp; rm -f "/boot/config/plugins/&name;.plg"
+fi
+
+echo "...Uninstall complete! Please reboot to remove any remaining dependency files."
+sleep 1
+</INLINE>
+</FILE>
+
+</PLUGIN>
