@@ -321,9 +321,9 @@ if [ "$DEPMD5" != "" ]; then
 			[ -f "/tmp/&name;-inst/install-B/&name;-sql.tgz" ] &amp;&amp; rm -f "/tmp/&name;-inst/install-B/&name;*sql*.tgz"
 			[ -f "/tmp/&name;-inst/install-B/&name;-sql-x86_64.tgz" ] &amp;&amp; rm -f "/tmp/&name;-inst/install-B/&name;-sql-x86_64.tgz"
 		fi
-		echo -e "\t Move Config Editor to plugin dir..."
+		echo -e "\t Move Config Editor archive to plugin dir..."
 		# Move Config Editor to plugin dir
-		[ -f "/tmp/&name;-inst/install-B/ConfEdit.tar.gz" ] &amp;&amp; cp -f "/tmp/&name;-inst/install-B/ConfEdit.tar.gz" "&plg;/"
+		[ -f "/tmp/&name;-inst/install-B/ConfEdit.tar.gz" ] &amp;&amp; mv -f "/tmp/&name;-inst/install-B/ConfEdit.tar.gz" "&plg;/"
 
 		ROOT="&commonDIR;" upgradepkg --install-new /tmp/&name;-inst/install-B/*
 		if [ ! -f "/usr/share/curl/ca-bundle.crt" ] &amp;&amp; [ -f "&commonDIR;/usr/share/curl/ca-bundle.crt" ]; then
