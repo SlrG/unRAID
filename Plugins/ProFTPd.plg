@@ -19,7 +19,6 @@
 	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.0_x64.tar.gz">
 	<!ENTITY dependencyMD564	"3be6208c5cedb7f00893fefd2225b56c">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
-	<!ENTITY appURL				"http://www.proftpd.org/">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
 
