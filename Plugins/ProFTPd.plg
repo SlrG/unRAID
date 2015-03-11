@@ -312,6 +312,14 @@ if [ "$DEPMD5" != "" ]; then
 		mkdir -p "/tmp/&name;-inst/install-B"
 		[ ! -d "&commonDIR;/var/log/setup/tmp" ] &amp;&amp; mkdir -p "&commonDIR;/var/log/setup/tmp"
 		tar -xf "$DEPFILES" -C "/tmp/&name;-inst/install-B"
+		# Detect if MySQL/MariaDB is installed
+		if [ -d "/usr/lib/mysql" ] || [ -d "/usr/lib64/mysql" ]; then
+			[ -f "/tmp/&name;-inst/install-B/&name;.tgz" ] &amp;&amp; rm -f "/tmp/&name;-inst/install-B/&name;.tgz"
+			[ -f "/tmp/&name;-inst/install-B/&name;-x86_64.tgz" ] &amp;&amp; rm -f "/tmp/&name;-inst/install-B/&name;-x86_64.tgz"
+		else
+			[ -f "/tmp/&name;-inst/install-B/&name;-sql.tgz" ] &amp;&amp; rm -f "/tmp/&name;-inst/install-B/&name;*sql*.tgz"
+			[ -f "/tmp/&name;-inst/install-B/&name;-sql-x86_64.tgz" ] &amp;&amp; rm -f "/tmp/&name;-inst/install-B/&name;-sql-x86_64.tgz"
+		fi
 		ROOT="&commonDIR;" upgradepkg --install-new /tmp/&name;-inst/install-B/*
 		if [ ! -f "/usr/share/curl/ca-bundle.crt" ] &amp;&amp; [ -f "&commonDIR;/usr/share/curl/ca-bundle.crt" ]; then
 			mkdir -p "/usr/share/curl"
