@@ -17,7 +17,7 @@
 	<!ENTITY dependencyMD5		"3e6721c7c98fe4ca8910526791901cb6">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
 	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.0_x64.tar.gz">
-	<!ENTITY dependencyMD564	"3be6208c5cedb7f00893fefd2225b56c">
+	<!ENTITY dependencyMD564	"8a170a1cf77061083a74d62be3bf7cf8">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
