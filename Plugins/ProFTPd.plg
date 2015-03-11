@@ -151,7 +151,7 @@ rmRecursiveNoWarn() {
 	test -e $1 &amp;&amp; rm -r $1 2>/dev/null
 }
 
-#One-time remove of legacy packages from previous ProFTPd plugin versions
+#One-time remove of legacy packages from previous plugin versions
 #Selfremoval commands
 echo
 echo "Executing selfremoval commands if present..."
@@ -372,6 +372,12 @@ if [ -f "/etc/rc.d/rc.&name;" ]; then
 	/etc/rc.d/rc.&name; stop
 fi
 sleep 1
+
+# Check if ConfigEditor is installed and remove it...
+source "$CFGFILE"
+if [ "$WEBSRV" == "enable" ] &amp;&amp; [ "$WPATH" != "" ]; then
+	[ -d "$WPATH/&name;" ] &amp;&amp; rm -fR "$WPATH/&name;"
+fi
 
 # Get the arch type to see what version of unraid is running
 ARCHTYPE=$( /usr/bin/uname -m )
