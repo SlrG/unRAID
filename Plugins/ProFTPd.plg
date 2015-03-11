@@ -14,10 +14,10 @@
 	<!ENTITY controlMD5			"016b9317ea3a38719478c228c367609c">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
-	<!ENTITY dependencyMD5		"3e6721c7c98fe4ca8910526791901cb6">
+	<!ENTITY dependencyMD5		"f4262d63c5f5eecc260a9fec598f84ea">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
 	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.0_x64.tar.gz">
-	<!ENTITY dependencyMD564	"8a170a1cf77061083a74d62be3bf7cf8">
+	<!ENTITY dependencyMD564	"b1ee31f68eb8f0077c4f0ad9e2fb3b52">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
@@ -231,6 +231,7 @@ if [ ! -f "$DEPFILES" ] &amp;&amp; [ "$DEPMD5" != "" ]; then
 	echo -e "\t Latest plugin dependency files downloading"
 	if [ "$HASNET" == "yes" ]; then
 		mkdir -p /boot/config/plugins/&name;
+		wget --no-check-certificate -qO "$DEPFILES" "$DEPURL"
 		wget --no-check-certificate -qO "$DEPFILES" "$DEPURL"
 		if [ -f "$DEPFILES" ]; then
 			MD5TEST2=`echo "$DEPMD5  $DEPFILES" | md5sum --quiet --status -c - &amp;&amp; echo "1" || echo "0"`
