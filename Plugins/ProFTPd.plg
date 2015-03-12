@@ -556,7 +556,6 @@ fi
 ARCHTYPE=$( /usr/bin/uname -m )
 
 # Remove all files and directories pertaining to this plugin
-[ -d "&commonDIR;/&name;" ] &amp;&amp; rm -fR "&commonDIR;/&name;"
 if [ "$(find &commonDIR; -type f | grep startcfg.sh | wc -l 2> /dev/null)" == "0" ]; then
 	rm -Rf "&commonDIR;"
 fi
