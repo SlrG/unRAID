@@ -526,6 +526,7 @@ rm -f "/tmp/&name;-script"
 # ==============================================
 # The 'remove' script
 # ==============================================
+CFGFILE="/boot/config/plugins/&name;/&name;.cfg"
 
 echo "Uninstalling $displayName; plugin..."
 sleep 1
