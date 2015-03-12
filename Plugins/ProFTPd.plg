@@ -8,6 +8,7 @@
 	<!ENTITY plgVersion			"2015.03.10.1">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
+	<!ENTITY pid 				"/var/run/proftpd.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
 	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
@@ -31,45 +32,18 @@
 
 <!--
 =========================================================================
+License
+=========================================================================
+
+GNU General Public License v3 (GPL v3)
+
+=========================================================================
 Description
 =========================================================================
 
 This Plugin installs and controls ProFTPd for UnRaid.
-All dependencies are installed as needed and everything is controllable from the webgui.
-
-=========================================================================
-Version History
-=========================================================================
-
-2015-03-10 - version 1.0	: Re-written based on PhAzEs v2 plugins to run with Unraid 6 Plugin Manager
-PhAzE Comments:
-		- Universal based plugin now downloads appropriate depedencies based on the OS architeture used
-		- Installs from USB copy if no internet connection is found and files exist on USB
-		- Added GUI setting to disable online checks by the plugin on page load
-		- Added dependency section to view main dependency versions and very they are working
-		- Added ability to uninstall the plugin and files from within the plugin GUI
-		- Dependencies now install to a common folder and app starts with a wrapper script
-		- Wrapper script adds environment variables for the common dependency folder upon start
-		- When plugin is uninstalled from PLGMGR or plugin GUI all files even dependencies are removed
-		- Plugin uninstall leaves installdir and configdir, up to user to delete those if they are not needed
-
-2013-12-28 - version 0.5k	: Removed SimpleFeatures recognition and added manual webserver configuration.
-2013-11-13 - version 0.5j	: Added scripts to mount directories on array start and unmount them on array stop.
-2013-11-13 - version 0.5i	: Fixed refresh of control panel plugin by adding sudo -u root to restart of inetd.
-2013-11-08 - version 0.5h	: Downgraded openssl to 0.9.8n because 1.0.1c was creating problems with other plugins using the older version. (Thanks Madhouse!)
-2013-07-17 - version 0.5g	: Fixed problem that slashes were removed from proftpd.conf on save and removed unnecessary sudo commands. (Thanks Necrotic!)
-2013-05-28 - version 0.5f	: Move binary files from github to personal webspace and change version check.
-2013-05-28 - version 0.5e	: Fixed openssl dependency.
-2013-05-27 - version 0.5d	: Fixed error message when no SimpleFeatures webserver is installed.
-2013-05-23 - version 0.5c	: Change of wordings.
-2013-05-23 - version 0.5b	: Disable FTP Server icon of unRAIDs internal ftp server. (Thanks saary!)
-2013-05-23 - version 0.5a	: Fixed stupid bug that blocked the downloading of files from the github repo. (Thanks saary!)
-2013-04-04 - version 0.5	: Added syntax checking and line numbering to config file editor.
-2013-03-29 - version 0.4	: Update functionality for plugin (Thanks overbyrn!).
-2013-03-23 - version 0.3	: Provide config editor in iframe if simplefeatures webserver is available.
-2013-02-08 - version 0.2	: Check if sql is installed and choose proftpd package accordingly.
-2013-02-02 - version 0.1a	: Enable download of iconfiles if not yet present. (Thanks overbyrn!)
-2013-02-01 - version 0.1	: First release
+All dependencies are installed as needed and everything is controllable
+from the webgui.
 
 =========================================================================
 List of files created by this plugin
@@ -197,6 +171,41 @@ findings.
 
 SlrG
 -->
+
+<CHANGES>
+###2015-03-10
+- version 1.0	: Re-written based on PhAzEs v2 plugins to run with Unraid 6 Plugin Manager
+###2013-12-28
+ - version 0.5k	: Removed SimpleFeatures recognition and added manual webserver configuration.
+###2013-11-13
+ - version 0.5j	: Added scripts to mount directories on array start and unmount them on array stop.
+ - version 0.5i	: Fixed refresh of control panel plugin by adding sudo -u root to restart of inetd.
+###2013-11-08
+ - version 0.5h	: Downgraded openssl to 0.9.8n because 1.0.1c was creating problems with other plugins using the older version. (Thanks Madhouse!)
+###2013-07-17
+ - version 0.5g	: Fixed problem that slashes were removed from proftpd.conf on save and removed unnecessary sudo commands. (Thanks Necrotic!)
+###2013-05-28
+ - version 0.5f	: Move binary files from github to personal webspace and change version check.
+ - version 0.5e	: Fixed openssl dependency.
+###2013-05-27
+ - version 0.5d	: Fixed error message when no SimpleFeatures webserver is installed.
+###2013-05-23
+ - version 0.5c	: Change of wordings.
+ - version 0.5b	: Disable FTP Server icon of unRAIDs internal ftp server. (Thanks saary!)
+ - version 0.5a	: Fixed stupid bug that blocked the downloading of files from the github repo. (Thanks saary!)
+###2013-04-04
+ - version 0.5	: Added syntax checking and line numbering to config file editor.
+###2013-03-29
+ - version 0.4	: Update functionality for plugin (Thanks overbyrn!).
+###2013-03-23
+ - version 0.3	: Provide config editor in iframe if simplefeatures webserver is available.
+###2013-02-08
+ - version 0.2	: Check if sql is installed and choose proftpd package accordingly.
+###2013-02-02
+ - version 0.1a	: Enable download of iconfiles if not yet present. (Thanks overbyrn!)
+###2013-02-01
+ - version 0.1	: First release
+</CHANGES>
 
 <FILE Name="/tmp/&name;-script" Run="/bin/bash">
 <INLINE>
@@ -424,6 +433,20 @@ fi
 [ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; sed -i 's!\r!!g' "/etc/rc.d/rc.&name;"
 [ -d "/usr/local/emhttp/plugins/&name;/event" ] &amp;&amp; sed -i 's!\r!!g' /usr/local/emhttp/plugins/&name;/event/*
 
+#detect if run on boot
+if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
+  echo "Disable builtin FTP-Server..."
+  /bin/sed -i -e "s/^ftp/#ftp/" /etc/inetd.conf
+  echo "Restart inetd to apply change..."
+  /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
+  echo "Disable icon of builtin FTP-Server..."
+  mv /usr/local/emhttp/plugins/webGui/FTP.page /usr/local/emhttp/plugins/webGui/FTP.page.bak
+  echo "Remove example config file..."
+  rm /usr/local/etc/proftpd.conf
+  echo "Symlink new config file..."
+  /bin/ln -s &plg;/proftpd.conf /etc/proftpd.conf
+fi
+
 # Create or update the export file
 [ ! -d "&commonDIR;/&name;" ] &amp;&amp; mkdir -p "&commonDIR;/&name;"
 /etc/rc.d/rc.&name; writeexport
@@ -439,7 +462,64 @@ rm -f "/tmp/&name;-script"
 </INLINE>
 </FILE>
 
+<FILE Name="&plg;/proftpd.conf">
+<INLINE>
+# Server Settings
+ServerName              ProFTPd
+ServerType              standalone
+DefaultServer           on
+PidFile                 &pid;
 
+# Port 21 is the standard FTP port. You propably should not connect to the
+# internet with this port. Make your router forward another port to
+# this one instead.
+Port                    21
+
+# Set the user and group under which the server will run.
+User                    nobody
+Group                   users
+
+# Prevent DoS attacks
+MaxInstances            30
+
+# Speedup Login
+UseReverseDNS           off
+IdentLookups            off
+
+# Control Logging - comment and uncomment as needed
+# If logging Directory is world writeable the server won't start!
+# If no SystemLog is defined proftpd will log to servers syslog.
+#SystemLog               NONE
+#SystemLog               &plg;/slog
+TransferLog             NONE
+#TransferLog             &plg;/xferlog
+WtmpLog                 NONE
+
+# As a security precaution prevent root and other users in
+# /etc/ftpuser from accessing the FTP server.
+UseFtpUsers             on
+RootLogin               off
+
+# Umask 022 is a good standard umask to prevent new dirs and files
+# from being group and world writable.
+Umask 022
+
+# "Jail" FTP-Users into their home directory. (chroot)
+# The root directory has to be set in the description field
+# when defining an user:
+# ftpuser /mnt/cache/FTP
+# See README for more information.
+DefaultRoot ~
+
+# Shell has to be set when defining an user. As a security precaution
+# it is set to "/bin/false" as FTP-Users should not have shell access.
+# This setting makes proftpd accept invalid shells.
+RequireValidShell       no
+
+# Normally, we want files to be overwriteable.
+AllowOverwrite          on
+</INLINE>
+</FILE>
 
 <FILE Run="/bin/bash" Method="remove">
 <INLINE>
