@@ -496,12 +496,16 @@ if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
   /bin/sed -i -e "s/^ftp/##ftp/" /etc/inetd.conf
   echo "Restart inetd to apply change..."
   /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
+fi
+if [ -f "/usr/local/emhttp/webGui/FTP.page" ]; then
   echo "Disable icon of builtin FTP-Server..."
   mv /usr/local/emhttp/webGui/FTP.page /usr/local/emhttp/webGui/FTP.page.bak
+fi
+if [ ! -f "/etc/proftpd.conf" ]; then
   echo "Remove example config file..."
-  rm &commonDIR;/usr/local/etc/proftpd.conf
+  [ -f "&commonDIR;/usr/local/etc/proftpd.conf" ] &amp;&amp; rm &commonDIR;/usr/local/etc/proftpd.conf
   echo "Symlink new config file..."
-  /bin/ln -s &plg;/proftpd.conf /etc/proftpd.conf
+  [ -f "&plg;/proftpd.conf" ] &amp;&amp; /bin/ln -s &plg;/proftpd.conf /etc/proftpd.conf
 fi
 
 # Create /usr/local/var if it doesn't exist
@@ -541,11 +545,15 @@ fi
 #Reenable builtin FTP-Server
 if [[ -n $(sed -n '/^##ftp/p' /etc/inetd.conf) ]]; then
   echo "Enable builtin FTP-Server..."
-  /bin/sed -i -e "s/^#ftp/ftp/" /etc/inetd.conf
+  /bin/sed -i -e "s/^ftp/ftp/" /etc/inetd.conf
   echo "Restart inetd to apply change..."
   /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
+fi
+if [ -f /usr/local/emhttp/webGui/FTP.page.bak ]; then
   echo "Enable icon of builtin FTP-Server..."
   mv /usr/local/emhttp/webGui/FTP.page.bak /usr/local/emhttp/webGui/FTP.page
+fi
+if [ - f /etc/proftpd.conf ]; then
   echo "Remove config file..."
   rm /etc/proftpd.conf
 fi
@@ -559,7 +567,7 @@ if [ "$(find &commonDIR; -type f | grep startcfg.sh | wc -l 2> /dev/null)" == "0
 fi
 
 # Clear /usr/local/var from plugin files
-rm /usr/local/var/proftpd.*
+[ -f /usr/local/var/proftpd.* ] &amp;&amp; rm /usr/local/var/proftpd.*
 
 [ -d "/usr/local/emhttp/plugins/&name;" ] &amp;&amp; rm -fR "/usr/local/emhttp/plugins/&name;"
 [ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; rm -f "/etc/rc.d/rc.&name;"
