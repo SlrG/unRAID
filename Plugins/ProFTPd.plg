@@ -507,8 +507,6 @@ fi
 # Create /usr/local/var if it doesn't exist
 [ ! -d "/usr/local/var" ] &amp;&amp; mkdir /usr/local/var
 
-/etc/rc.d/rc.&name; start
-
 # Remove the temp install folder
 echo -e "\t Cleaning up temp files/folders"
 rm -Rf "/tmp/&name;-inst"
