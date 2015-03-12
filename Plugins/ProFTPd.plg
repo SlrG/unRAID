@@ -542,6 +542,18 @@ if [ "$WEBSRV" == "enable" ] &amp;&amp; [ "$WPATH" != "" ]; then
 	[ -d "$WPATH/&name;" ] &amp;&amp; rm -fR "$WPATH/&name;"
 fi
 
+#detect if run on boot
+if [[ -n $(sed -n '/^#ftp/p' /etc/inetd.conf) ]]; then
+  echo "Enable builtin FTP-Server..."
+  /bin/sed -i -e "s/^#ftp/ftp/" /etc/inetd.conf
+  echo "Restart inetd to apply change..."
+  /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
+  echo "Enable icon of builtin FTP-Server..."
+  mv /usr/local/emhttp/webGui/FTP.page.bak /usr/local/emhttp/webGui/FTP.page
+  echo "Remove config file..."
+  rm /etc/proftpd.conf
+fi
+
 # Get the arch type to see what version of unraid is running
 ARCHTYPE=$( /usr/bin/uname -m )
 
