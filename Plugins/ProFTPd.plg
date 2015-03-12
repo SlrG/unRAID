@@ -207,6 +207,65 @@ SlrG
  - version 0.1	: First release
 </CHANGES>
 
+<FILE Name="&plg;/proftpd.conf">
+<INLINE>
+# Server Settings
+ServerName              ProFTPd
+ServerType              standalone
+DefaultServer           on
+PidFile                 &pid;
+
+# Port 21 is the standard FTP port. You propably should not connect to the
+# internet with this port. Make your router forward another port to
+# this one instead.
+Port                    21
+
+# Set the user and group under which the server will run.
+User                    nobody
+Group                   users
+
+# Prevent DoS attacks
+MaxInstances            30
+
+# Speedup Login
+UseReverseDNS           off
+IdentLookups            off
+
+# Control Logging - comment and uncomment as needed
+# If logging Directory is world writeable the server won't start!
+# If no SystemLog is defined proftpd will log to servers syslog.
+#SystemLog               NONE
+#SystemLog               &plg;/slog
+TransferLog             NONE
+#TransferLog             &plg;/xferlog
+WtmpLog                 NONE
+
+# As a security precaution prevent root and other users in
+# /etc/ftpuser from accessing the FTP server.
+UseFtpUsers             on
+RootLogin               off
+
+# Umask 022 is a good standard umask to prevent new dirs and files
+# from being group and world writable.
+Umask 022
+
+# "Jail" FTP-Users into their home directory. (chroot)
+# The root directory has to be set in the description field
+# when defining an user:
+# ftpuser /mnt/cache/FTP
+# See README for more information.
+DefaultRoot ~
+
+# Shell has to be set when defining an user. As a security precaution
+# it is set to "/bin/false" as FTP-Users should not have shell access.
+# This setting makes proftpd accept invalid shells.
+RequireValidShell       no
+
+# Normally, we want files to be overwriteable.
+AllowOverwrite          on
+</INLINE>
+</FILE>
+
 <FILE Name="/tmp/&name;-script" Run="/bin/bash">
 <INLINE>
 # =========================================================================
@@ -440,9 +499,9 @@ if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
   echo "Restart inetd to apply change..."
   /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
   echo "Disable icon of builtin FTP-Server..."
-  mv /usr/local/emhttp/plugins/webGui/FTP.page /usr/local/emhttp/plugins/webGui/FTP.page.bak
+  mv /usr/local/emhttp/webGui/FTP.page /usr/local/emhttp/webGui/FTP.page.bak
   echo "Remove example config file..."
-  rm /usr/local/etc/proftpd.conf
+  rm &commonDIR;/usr/local/etc/proftpd.conf
   echo "Symlink new config file..."
   /bin/ln -s &plg;/proftpd.conf /etc/proftpd.conf
 fi
@@ -459,65 +518,6 @@ rm -Rf "/tmp/&name;-inst"
 echo "...Install complete!"
 
 rm -f "/tmp/&name;-script"
-</INLINE>
-</FILE>
-
-<FILE Name="&plg;/proftpd.conf">
-<INLINE>
-# Server Settings
-ServerName              ProFTPd
-ServerType              standalone
-DefaultServer           on
-PidFile                 &pid;
-
-# Port 21 is the standard FTP port. You propably should not connect to the
-# internet with this port. Make your router forward another port to
-# this one instead.
-Port                    21
-
-# Set the user and group under which the server will run.
-User                    nobody
-Group                   users
-
-# Prevent DoS attacks
-MaxInstances            30
-
-# Speedup Login
-UseReverseDNS           off
-IdentLookups            off
-
-# Control Logging - comment and uncomment as needed
-# If logging Directory is world writeable the server won't start!
-# If no SystemLog is defined proftpd will log to servers syslog.
-#SystemLog               NONE
-#SystemLog               &plg;/slog
-TransferLog             NONE
-#TransferLog             &plg;/xferlog
-WtmpLog                 NONE
-
-# As a security precaution prevent root and other users in
-# /etc/ftpuser from accessing the FTP server.
-UseFtpUsers             on
-RootLogin               off
-
-# Umask 022 is a good standard umask to prevent new dirs and files
-# from being group and world writable.
-Umask 022
-
-# "Jail" FTP-Users into their home directory. (chroot)
-# The root directory has to be set in the description field
-# when defining an user:
-# ftpuser /mnt/cache/FTP
-# See README for more information.
-DefaultRoot ~
-
-# Shell has to be set when defining an user. As a security precaution
-# it is set to "/bin/false" as FTP-Users should not have shell access.
-# This setting makes proftpd accept invalid shells.
-RequireValidShell       no
-
-# Normally, we want files to be overwriteable.
-AllowOverwrite          on
 </INLINE>
 </FILE>
 
