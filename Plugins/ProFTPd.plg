@@ -542,7 +542,7 @@ if [ "$WEBSRV" == "enable" ] &amp;&amp; [ "$WPATH" != "" ]; then
 	[ -d "$WPATH/&name;" ] &amp;&amp; rm -fR "$WPATH/&name;"
 fi
 
-#detect if run on boot
+#Reenable builtin FTP-Server
 if [[ -n $(sed -n '/^#ftp/p' /etc/inetd.conf) ]]; then
   echo "Enable builtin FTP-Server..."
   /bin/sed -i -e "s/^#ftp/ftp/" /etc/inetd.conf
