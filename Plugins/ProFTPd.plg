@@ -82,7 +82,6 @@ rc.ProFTPd						-> This is the control file. The one that starts, stops, and ins
 
 INSTALLED TO: /usr/local/SlrG-Common/ProFTPd
 
-startcfg.sh						-> This is a script that exports environment variables on app start, created on app install
 All dependency files			-> These are binaries and apps that are required to run the application
 
 =========================================================================
@@ -433,7 +432,6 @@ fi
 [ ! `cat "$CFGFILE" | grep WEBSRV` ] &amp;&amp; echo "WEBSRV=\"disable\"" &gt;&gt; "$CFGFILE"
 [ ! `cat "$CFGFILE" | grep WPATH` ] &amp;&amp; echo "WPATH=\"\"" &gt;&gt; "$CFGFILE"
 [ ! `cat "$CFGFILE" | grep WPORT` ] &amp;&amp; echo "WPORT=\"\"" &gt;&gt; "$CFGFILE"
-[ ! `cat "$CFGFILE" | grep CHECKONLINE` ] &amp;&amp; echo "CHECKONLINE=\"yes\"" &gt;&gt; "$CFGFILE"
 
 # Extract and install the plugin support files from the tar.gz file
 echo -e "\t Installing plugin control files"
@@ -509,9 +507,7 @@ fi
 # Create /usr/local/var if it doesn't exist
 [ ! -d "/usr/local/var" ] &amp;&amp; mkdir /usr/local/var
 
-# Create or update the export file
-[ ! -d "&commonDIR;/&name;" ] &amp;&amp; mkdir -p "&commonDIR;/&name;"
-/etc/rc.d/rc.&name; writeexport
+/etc/rc.d/rc.&name; start
 
 # Remove the temp install folder
 echo -e "\t Cleaning up temp files/folders"
