@@ -495,7 +495,7 @@ fi
 #detect if run on boot
 if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
   echo "Disable builtin FTP-Server..."
-  /bin/sed -i -e "s/^ftp/#ftp/" /etc/inetd.conf
+  /bin/sed -i -e "s/^ftp/##ftp/" /etc/inetd.conf
   echo "Restart inetd to apply change..."
   /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
   echo "Disable icon of builtin FTP-Server..."
@@ -506,10 +506,12 @@ if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
   /bin/ln -s &plg;/proftpd.conf /etc/proftpd.conf
 fi
 
+# Create /usr/local/var if it doesn't exist
+[ ! -d "/usr/local/var" ] &amp;&amp; mkdir /usr/local/var
+
 # Create or update the export file
 [ ! -d "&commonDIR;/&name;" ] &amp;&amp; mkdir -p "&commonDIR;/&name;"
 /etc/rc.d/rc.&name; writeexport
-[ -f "&commonDIR;/&name;/startcfg.sh" ] &amp;&amp; sed -i 's!\r!!g' "&commonDIR;/&name;/startcfg.sh"
 
 # Remove the temp install folder
 echo -e "\t Cleaning up temp files/folders"
@@ -543,7 +545,7 @@ if [ "$WEBSRV" == "enable" ] &amp;&amp; [ "$WPATH" != "" ]; then
 fi
 
 #Reenable builtin FTP-Server
-if [[ -n $(sed -n '/^#ftp/p' /etc/inetd.conf) ]]; then
+if [[ -n $(sed -n '/^##ftp/p' /etc/inetd.conf) ]]; then
   echo "Enable builtin FTP-Server..."
   /bin/sed -i -e "s/^#ftp/ftp/" /etc/inetd.conf
   echo "Restart inetd to apply change..."
@@ -562,6 +564,10 @@ ARCHTYPE=$( /usr/bin/uname -m )
 if [ "$(find &commonDIR; -type f | grep startcfg.sh | wc -l 2> /dev/null)" == "0" ]; then
 	rm -Rf "&commonDIR;"
 fi
+
+# Clear /usr/local/var from plugin files
+rm /usr/local/var/proftpd.*
+
 [ -d "/usr/local/emhttp/plugins/&name;" ] &amp;&amp; rm -fR "/usr/local/emhttp/plugins/&name;"
 [ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; rm -f "/etc/rc.d/rc.&name;"
 [ -e "/var/log/plugins/&name;.plg" ] &amp;&amp; rm -f "/var/log/plugins/&name;.plg"
