@@ -12,7 +12,7 @@
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
 	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
-	<!ENTITY controlMD5			"8e3c3658569729dd1727ad5f0aa91304">
+	<!ENTITY controlMD5			"0223e36ae9ce728af52d2acf447d6668">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"f4262d63c5f5eecc260a9fec598f84ea">
