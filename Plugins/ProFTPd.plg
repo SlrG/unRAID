@@ -12,7 +12,7 @@
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
 	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
-	<!ENTITY controlMD5			"45804d7f36372898ecca2ab152a2c62e">
+	<!ENTITY controlMD5			"2e6d092a9dbc8fd54f038f964859c488">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"b6343b1dfa5ab78ca02d2a0b892af288">
@@ -534,6 +534,9 @@ if [ -f "/etc/rc.d/rc.&name;" ]; then
 	/etc/rc.d/rc.&name; stop
 fi
 sleep 1
+
+# Unjail users
+	/etc/rc.d/rc.&name; unjail
 
 # Check if ConfigEditor is installed and remove it...
 source "$CFGFILE"
