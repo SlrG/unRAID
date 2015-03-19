@@ -12,7 +12,7 @@
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
 	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
-	<!ENTITY controlMD5			"76f3ffd5e93cc47e935a0b329eb2b7ad">
+	<!ENTITY controlMD5			"9c990b8658037e67ab3289489770b577">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"f4262d63c5f5eecc260a9fec598f84ea">
@@ -274,8 +274,6 @@ AllowOverwrite          on
 # Setup plugin variables
 CTRLFILES="/boot/config/plugins/&name;/&controlFILE;"
 CFGFILE="/boot/config/plugins/&name;/&name;.cfg"
-OLDPNG="proftpd.png"
-OLDNAME="proftpd"
 
 # Since this is a universal plugin for unraid, check if running 32 bit or 64 bit OS for dependencies
 ARCHTYPE=$( /usr/bin/uname -m )
