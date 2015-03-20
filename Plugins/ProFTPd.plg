@@ -274,6 +274,29 @@ AllowOverwrite          on
 # Setup plugin variables
 CTRLFILES="/boot/config/plugins/&name;/&controlFILE;"
 CFGFILE="/boot/config/plugins/&name;/&name;.cfg"
+OLDNAME="proftpd"
+
+if [ -d "/boot/config/plugins/$OLDNAME" ]; then
+	[ -f "/etc/rc.d/rc.$OLDNAME" ] &amp;&amp; "/etc/rc.d/rc.$OLDNAME" stop &amp;&amp; rm -f "/etc/rc.d/rc.$OLDNAME"
+	md "/boot/config/plugins/&name;
+	if [ -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.cfg" ]; then
+		mv -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.cfg" "/boot/config/plugins/&name;/&name;.cfg"
+	fi
+	if [ -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.conf" ]; then
+		mv -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.conf" "/boot/config/plugins/&name;/"
+	fi
+	rm -rf "/boot/config/plugins/$OLDNAME"
+	[ -d "/usr/local/emhttp/plugins/$OLDNAME" ] &amp;&amp; rm -rf "/usr/local/emhttp/plugins/$OLDNAME"
+	if [ "x86_64" == "$ARCHTYPE" ]; then
+		if [ -f "/boot/config/plugins/${OLDNAME}_v6.plg" ]; then
+			/usr/local/sbin/plugin remove "${OLDNAME}_v6.plg"
+		fi
+	else
+		if [ -f "/boot/config/plugins/${OLDNAME}.plg" ]; then
+			rm -f "/boot/config/plugins/${OLDNAME}.plg"
+		fi
+	fi
+fi
 
 # Since this is a universal plugin for unraid, check if running 32 bit or 64 bit OS for dependencies
 ARCHTYPE=$( /usr/bin/uname -m )
@@ -300,9 +323,10 @@ rmRecursiveNoWarn() {
 	test -e $1 &amp;&amp; rm -r $1 2>/dev/null
 }
 
+
+
 #One-time remove of legacy packages from previous plugin versions
 #Selfremoval commands
-echo
 echo "Executing selfremoval commands if present..."
 #rmNoWarn &plg;/filename; sed -i '/#srmtag00001/d' &pld;/&name;.plg		# Example for selfremoval commands
 
