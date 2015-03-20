@@ -281,6 +281,7 @@ OLDNAME="proftpd"
 DIREXISTS=`find "/boot/config/plugins" -type d -maxdepth 1 | grep "$OLDNAME"`
 if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 	[ -f "/etc/rc.d/rc.$OLDNAME" ] &amp;&amp; "/etc/rc.d/rc.$OLDNAME" stop &amp;&amp; rm -f "/etc/rc.d/rc.$OLDNAME"
+	/bin/sed -i -e "/vsftpd$/s/#ftp/ftp/" /etc/inetd.conf
 	mv -f "/boot/config/plugins/$OLDNAME" "/boot/config/plugins/$OLDNAME-temp"
 	mkdir "/boot/config/plugins/&name;"
 	if [ -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.cfg" ]; then
@@ -606,6 +607,10 @@ fi
 [ -d "/boot/config/plugins/&name;" ] &amp;&amp; rm -fR "/boot/config/plugins/&name;"
 [ -f "/boot/config/plugins/&name;.plg.old" ] &amp;&amp; rm -f "/boot/config/plugins/&name;.plg.old"
 if [ "x86_64" != "$ARCHTYPE" ]; then
+	if [ -f "/usr/local/emhttp/plugins/webGui/FTP.page.bak" ]; then
+		echo "Enable icon of builtin FTP-Server..."
+		mv /usr/local/emhttp/plugins/webGui/FTP.page.bak /usr/local/emhttp/plugins/webGui/FTP.page
+	fi
 	[ -f "/boot/config/plugins/&name;.plg" ] &amp;&amp; rm -f "/boot/config/plugins/&name;.plg"
 fi
 
