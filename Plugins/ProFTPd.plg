@@ -281,12 +281,13 @@ OLDNAME="proftpd"
 DIREXISTS=`find "/boot/config/plugins" -type d -maxdepth 1 | grep "$OLDNAME"`
 if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 	[ -f "/etc/rc.d/rc.$OLDNAME" ] &amp;&amp; "/etc/rc.d/rc.$OLDNAME" stop &amp;&amp; rm -f "/etc/rc.d/rc.$OLDNAME"
+	mv -f "/boot/config/plugins/$OLDNAME" "/boot/config/plugins/$OLDNAME-temp"
 	mkdir "/boot/config/plugins/&name;"
-	if [ -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.cfg" ]; then
-		mv -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.cfg" "/boot/config/plugins/&name;/&name;.cfg"
+	if [ -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.cfg" ]; then
+		mv -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.cfg" "/boot/config/plugins/&name;/&name;.cfg"
 	fi
-	if [ -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.conf" ]; then
-		mv -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.conf" "/boot/config/plugins/&name;/"
+	if [ -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" ]; then
+		mv -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" "/boot/config/plugins/&name;/"
 	fi
 	rm -rf "/boot/config/plugins/$OLDNAME"
 	[ -d "/usr/local/emhttp/plugins/$OLDNAME" ] &amp;&amp; rm -rf "/usr/local/emhttp/plugins/$OLDNAME"
