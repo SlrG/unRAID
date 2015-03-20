@@ -12,7 +12,7 @@
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
 	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
-	<!ENTITY controlMD5			"8b81db410394d9e9569e50473cf4754b">
+	<!ENTITY controlMD5			"9279206d7f1e3c0ecbbb99c007ba0cd9">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"625b6e929f38fcdc0fd3274a6e21eb2c">
@@ -494,16 +494,16 @@ if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
   /bin/sed -i -e "s/^ftp/##ftp/" /etc/inetd.conf
   echo "Restart inetd to apply change..."
   /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
-fi
-if [ -f "/usr/local/emhttp/webGui/FTP.page" ]; then
-  echo "Disable icon of builtin FTP-Server..."
-  mv /usr/local/emhttp/webGui/FTP.page /usr/local/emhttp/webGui/FTP.page.bak
-fi
-if [ ! -f "/etc/proftpd.conf" ]; then
-  echo "Remove example config file..."
-  [ -f "&commonDIR;/usr/local/etc/proftpd.conf" ] &amp;&amp; rm &commonDIR;/usr/local/etc/proftpd.conf
-  echo "Symlink new config file..."
-  [ -f "&plg;/proftpd.conf" ] &amp;&amp; /bin/ln -s &plg;/proftpd.conf /etc/proftpd.conf
+  if [ -f "/usr/local/emhttp/webGui/FTP.page" ]; then
+    echo "Disable icon of builtin FTP-Server..."
+    mv /usr/local/emhttp/webGui/FTP.page /usr/local/emhttp/webGui/FTP.page.bak
+  fi
+  if [ ! -f "/etc/proftpd.conf" ]; then
+    echo "Remove example config file..."
+    [ -f "&commonDIR;/usr/local/etc/proftpd.conf" ] &amp;&amp; rm &commonDIR;/usr/local/etc/proftpd.conf
+    echo "Symlink new config file..."
+    [ -f "&plg;/proftpd.conf" ] &amp;&amp; /bin/ln -s &plg;/proftpd.conf /etc/proftpd.conf
+  fi
 fi
 
 # Create /usr/local/var if it doesn't exist
