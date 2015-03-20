@@ -295,10 +295,6 @@ if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 		if [ -f "/boot/config/plugins/${OLDNAME}_v6.plg" ]; then
 			/usr/local/sbin/plugin remove "${OLDNAME}_v6.plg"
 		fi
-	else
-		if [ -f "/boot/config/plugins/${OLDNAME}.plg" ]; then
-			rm -f "/boot/config/plugins/${OLDNAME}.plg"
-		fi
 	fi
 fi
 
