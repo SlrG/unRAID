@@ -12,7 +12,7 @@
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
 	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
-	<!ENTITY controlMD5			"9dcecd633055b0dce59fae640d2464a5">
+	<!ENTITY controlMD5			"075c17fe2f18733e787a6a9db3787aa3">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"bb42dc9a9fa467c957416ed17b959c77">
@@ -520,9 +520,15 @@ if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
   /bin/sed -i -e "s/^ftp/##ftp/" /etc/inetd.conf
   echo "Restart inetd to apply change..."
   /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
+  # v6
   if [ -f "/usr/local/emhttp/webGui/FTP.page" ]; then
     echo "Disable icon of builtin FTP-Server..."
     mv /usr/local/emhttp/webGui/FTP.page /usr/local/emhttp/webGui/FTP.page.bak
+  fi
+  # v5
+  if [ -f "/usr/local/emhttp/plugins/webGui/FTP.page" ]; then
+    echo "Disable icon of builtin FTP-Server..."
+    mv /usr/local/emhttp/plugins/webGui/FTP.page /usr/local/emhttp/plugins/webGui/FTP.page.bak
   fi
   if [ ! -f "/etc/proftpd.conf" ]; then
     echo "Remove example config file..."
@@ -581,9 +587,15 @@ if [[ -n $(sed -n '/^##ftp/p' /etc/inetd.conf) ]]; then
   echo "Restart inetd to apply change..."
   /usr/bin/sudo -u root /etc/rc.d/rc.inetd restart
 fi
+# v6
 if [ -f "/usr/local/emhttp/webGui/FTP.page.bak" ]; then
   echo "Enable icon of builtin FTP-Server..."
   mv /usr/local/emhttp/webGui/FTP.page.bak /usr/local/emhttp/webGui/FTP.page
+fi
+# v5
+if [ -f "/usr/local/emhttp/plugins/webGui/FTP.page.bak" ]; then
+	echo "Enable icon of builtin FTP-Server..."
+	mv /usr/local/emhttp/plugins/webGui/FTP.page.bak /usr/local/emhttp/plugins/webGui/FTP.page
 fi
 if [ -f "/etc/proftpd.conf" ]; then
   echo "Remove config file..."
@@ -607,10 +619,6 @@ fi
 [ -d "/boot/config/plugins/&name;" ] &amp;&amp; rm -fR "/boot/config/plugins/&name;"
 [ -f "/boot/config/plugins/&name;.plg.old" ] &amp;&amp; rm -f "/boot/config/plugins/&name;.plg.old"
 if [ "x86_64" != "$ARCHTYPE" ]; then
-	if [ -f "/usr/local/emhttp/plugins/webGui/FTP.page.bak" ]; then
-		echo "Enable icon of builtin FTP-Server..."
-		mv /usr/local/emhttp/plugins/webGui/FTP.page.bak /usr/local/emhttp/plugins/webGui/FTP.page
-	fi
 	[ -f "/boot/config/plugins/&name;.plg" ] &amp;&amp; rm -f "/boot/config/plugins/&name;.plg"
 fi
 
