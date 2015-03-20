@@ -278,7 +278,7 @@ OLDNAME="proftpd"
 
 if [ -d "/boot/config/plugins/$OLDNAME" ]; then
 	[ -f "/etc/rc.d/rc.$OLDNAME" ] &amp;&amp; "/etc/rc.d/rc.$OLDNAME" stop &amp;&amp; rm -f "/etc/rc.d/rc.$OLDNAME"
-	md "/boot/config/plugins/&name;
+	md "/boot/config/plugins/&name;"
 	if [ -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.cfg" ]; then
 		mv -f "/boot/config/plugins/${OLDNAME}/${OLDNAME}.cfg" "/boot/config/plugins/&name;/&name;.cfg"
 	fi
