@@ -289,7 +289,7 @@ if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 	if [ -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" ]; then
 		mv -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" "/boot/config/plugins/&name;/"
 	fi
-	sed -i "s_^PidFile.*_PidFile                 &pid;_g" "/boot/config/plugins/&name;/{$OLDNAME}.cfg"
+	sed -i "s_^PidFile.*_PidFile                 &pid;_g" "/boot/config/plugins/&name;/${OLDNAME}.cfg"
 	rm -rf "/boot/config/plugins/$OLDNAME-temp"
 	[ -d "/usr/local/emhttp/plugins/$OLDNAME" ] &amp;&amp; rm -rf "/usr/local/emhttp/plugins/$OLDNAME"
 	if [ "x86_64" == "$ARCHTYPE" ]; then
