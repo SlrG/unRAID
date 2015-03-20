@@ -289,7 +289,7 @@ if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 	if [ -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" ]; then
 		mv -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" "/boot/config/plugins/&name;/"
 	fi
-	rm -rf "/boot/config/plugins/$OLDNAME"
+	rm -rf "/boot/config/plugins/$OLDNAME-temp"
 	[ -d "/usr/local/emhttp/plugins/$OLDNAME" ] &amp;&amp; rm -rf "/usr/local/emhttp/plugins/$OLDNAME"
 	if [ "x86_64" == "$ARCHTYPE" ]; then
 		if [ -f "/boot/config/plugins/${OLDNAME}_v6.plg" ]; then
