@@ -546,8 +546,10 @@ rm -f "/tmp/&name;-script"
 </INLINE>
 </FILE>
 
-<FILE Run="/bin/bash" Method="remove">
+<FILE Name="/tmp/&name;-script" Run="/bin/bash" Method="remove">
 <INLINE>
+ARCHTYPE=$( /usr/bin/uname -m )
+if [ "x86_64" == "$ARCHTYPE" ]; then
 # ==============================================
 # The 'remove' script
 # ==============================================
@@ -596,7 +598,7 @@ if [ "$(find &commonDIR; -type f | grep startcfg.sh | wc -l 2> /dev/null)" == "0
 fi
 
 # Clear /usr/local/var from plugin files
-[ -f /usr/local/var/proftpd.* ] &amp;&amp; rm /usr/local/var/proftpd.*
+[ -f /usr/local/var/proftpd.* ] &amp;&amp; rm -f /usr/local/var/proftpd.*
 
 [ -d "/usr/local/emhttp/plugins/&name;" ] &amp;&amp; rm -fR "/usr/local/emhttp/plugins/&name;"
 [ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; rm -f "/etc/rc.d/rc.&name;"
@@ -609,6 +611,8 @@ fi
 
 echo "...Uninstall complete! Please reboot to remove any remaining dependency files."
 sleep 1
+fi
+rm -f "/tmp/&name;-script"
 </INLINE>
 </FILE>
 
