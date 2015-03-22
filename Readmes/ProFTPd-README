@@ -1,0 +1,85 @@
+=========================================================================
+README
+=========================================================================
+                                Credits:
+                             **************
+Great thanks go to Limetech for giving us unRAID. To the ProFTPD project for
+their feature rich ftp server and the icon I used for this plugin.
+
+Further thanks go to PhAzE. This Plugin uses a lot of his code he did for
+his plugins. Please check them out, they are really great! Also to Overbyrn,
+Benni-Chan, Influencer, prostuff1, speeding_ant and bonienl for their great
+plugins. Studying their code was what made this plugin possible.
+                             **************
+
+HOWTO:
+I wanted to keep this plugin as simple as possible. So there is no fancy
+user- or servermanagement. The plugin provides you with the ability to
+define ftp-only users and assign them their own home directory, which they
+won't be able to leave. Of course it is possible to assign the same directory
+to more than one user.
+
+So, how do you do it? You open the unRAID user management and choose add user.
+Then you choose username and password like you usually would. The
+difference is in the description field, what I guess you would normally
+leave empty. Into this field you put "ftpuser /path/to/homedir/of/user"
+without the quotes and save. Then please restart the proftp daemon.
+
+The daemon start script will now scan all users. Every user without the
+"ftpuser" keyword in the description field will be put into an ftpusers file.
+This files contains users who are not allowed to access the ftp server. I know
+this is a somewhat strange logic. :) Then the path to the user directory given
+in the description will be extracted and put into the root field of the user
+file. unRAID doesn't expose this field on its users page and normally fills it
+with / which would give all users access to all files on your server.
+
+You are now able to do something like:
+user
+user1 ftpuser
+user2 ftpuser /mnt/cache/FTP
+user3 ftpuser /mnt/cache/FTP/dir_a
+user4 ftpuser /mnt/cache/FTP/dir_b
+
+user  will not be able to login via ftp
+user1 will have full access to /
+user2 will have access to all files in /mnt/cache/FTP so he will be able to
+      access the files in dir_a and dir_b, too.
+user3 will have access to dir_a and subdirectories but not to /mnt/cache/FTP or
+      dir_b
+user4 will have access to dir_b and subdirectories but not to /mnt/cache/FTP or
+      dir_a
+
+So, what if this is not enough for you? Well, for a more fine grained control
+you may edit the /etc/proftpd.conf file. If you have a webserver with php
+installed and enabled, please point the plugin to its port and webroot.
+The plugin config page will then provide you with an editor for the proftpd.conf
+file. If not, you'll have to edit it in shell directly.
+
+By adding directory entries you'll have a powerful weapon to fulfill your needs.
+Have a look at:
+http://www.proftpd.org/docs/howto/Directory.html
+for further explanation.
+
+Bans, quotas, sftp, tls, sql users* and more may be possible. The proftpd
+included in my plugin was compiled with the following modules:
+  mod_auth.c          mod_quotatab.c
+  mod_auth_file.c     mod_quotatab_file.c
+  mod_auth_unix.c     mod_quotatab_sql.c*
+  mod_ban.c           mod_readme.c
+  mod_cap.c           mod_rewrite.c
+  mod_core.c          mod_sftp.c
+  mod_ctrls.c         mod_sftp_sql.c*
+  mod_ctrls_admin.c   mod_site.c
+  mod_delay.c         mod_sql.c*
+  mod_facts.c         mod_sql_mysql.c*
+  mod_ident.c         mod_sql_passwd.c*
+  mod_log.c           mod_tls.c
+  mod_ls.c            mod_xfer.c
+
+* only if sql package is installed
+
+In the future it may be possible to get php and sql based user and server
+management tools to work. Feel free to try and please report and share your
+findings.
+
+SlrG
