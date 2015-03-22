@@ -55,7 +55,7 @@ mountscript.sh					-> This is used to mount directories on array start
 ProFTPd-PhAzE-Control.tar.gz	-> This holds the plugin files
 ProFTPd.cfg						-> The config file used by the plugin
 ProFTPd-PhAzE-Support.tar.gz	-> This holds the plugins dependency files
-ProFTPd.conf					-> The config file used by proftpd
+proftpd.conf					-> The config file used by proftpd
 ConfEdit.tar.gz					-> This holds the proftpd config editor files
 unmountscript.sh				-> This is used to unmoung directories on array stop
 
@@ -83,7 +83,11 @@ rc.ProFTPd						-> This is the control file. The one that starts, stops, and ins
 INSTALLED TO: /usr/local/SlrG-Common/ProFTPd
 
 All dependency files			-> These are binaries and apps that are required to run the application
+-->
 
+
+<FILE Name="&plg;/README">
+<INLINE>
 =========================================================================
 README
 =========================================================================
@@ -170,6 +174,8 @@ findings.
 
 SlrG
 -->
+</INLINE>
+</FILE>
 
 <CHANGES>
 ###2015-03-10
@@ -360,8 +366,6 @@ rmNoWarn() {
 rmRecursiveNoWarn() {
 	test -e $1 &amp;&amp; rm -r $1 2>/dev/null
 }
-
-
 
 #One-time remove of legacy packages from previous plugin versions
 #Selfremoval commands
