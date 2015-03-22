@@ -265,6 +265,26 @@ AllowOverwrite          on
 </INLINE>
 </FILE>
 
+<FILE Name="&plg;/mountscript.sh">
+<INLINE>
+#!/bin/bash
+# put your commands for creating mount points and mounting here
+# they will be executed when the array starts
+# e.g.:
+# mkdir /mnt/cache/FTP/movies;mount --bind /mnt/user0/movies /mnt/cache/FTP/movies
+</INLINE>
+</FILE>
+
+<FILE Name="&plg;/unmountscript.sh">
+<INLINE>
+#!/bin/bash
+# put your commands for unmounting and removing mount points here
+# they will be executed when the array stops
+# e.g.:
+# umount /mnt/cache/FTP/movies;rmdir /mnt/cache/FTP/movies
+</INLINE>
+</FILE>
+
 <FILE Name="/tmp/&name;-script" Run="/bin/bash">
 <INLINE>
 # =========================================================================
@@ -285,10 +305,16 @@ if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 	mv -f "/boot/config/plugins/$OLDNAME" "/boot/config/plugins/$OLDNAME-temp"
 	mkdir "/boot/config/plugins/&name;"
 	if [ -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.cfg" ]; then
-		mv -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.cfg" "/boot/config/plugins/&name;/&name;.cfg"
+		mv -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.cfg" "/boot/config/plugins/&name;/"
 	fi
 	if [ -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" ]; then
 		mv -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" "/boot/config/plugins/&name;/"
+	fi
+	if [ -f "/boot/config/plugins/${OLDNAME}-temp/mountscript.sh" ]; then
+		mv -f "/boot/config/plugins/${OLDNAME}-temp/mountscript.sh" "/boot/config/plugins/&name;/"
+	fi
+	if [ -f "/boot/config/plugins/${OLDNAME}-temp/unmountscript.sh" ]; then
+		mv -f "/boot/config/plugins/${OLDNAME}-temp/unmountscript.sh" "/boot/config/plugins/&name;/"
 	fi
 	sed -i "s_^PidFile.*_PidFile                 &pid;_g" "/boot/config/plugins/&name;/${OLDNAME}.conf"
 	rm -rf "/boot/config/plugins/$OLDNAME-temp"
