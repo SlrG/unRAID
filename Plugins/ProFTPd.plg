@@ -540,6 +540,9 @@ fi
 [ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; sed -i 's!\r!!g' "/etc/rc.d/rc.&name;"
 [ -d "/usr/local/emhttp/plugins/&name;/event" ] &amp;&amp; sed -i 's!\r!!g' /usr/local/emhttp/plugins/&name;/event/*
 
+# Create /usr/local/var if it doesn't exist
+[ ! -d "/usr/local/var" ] &amp;&amp; mkdir /usr/local/var
+
 #detect if run on boot
 if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
   echo "Disable builtin FTP-Server..."
@@ -562,12 +565,9 @@ if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
     echo "Symlink new config file..."
     [ -f "&plg;/proftpd.conf" ] &amp;&amp; /bin/ln -s &plg;/proftpd.conf /etc/proftpd.conf
   fi
-else
-  /etc/rc.d/rc.ProFTPd start
 fi
 
-# Create /usr/local/var if it doesn't exist
-[ ! -d "/usr/local/var" ] &amp;&amp; mkdir /usr/local/var
+/etc/rc.d/rc.ProFTPd start
 
 # Remove the temp install folder
 echo -e "\t Cleaning up temp files/folders"
