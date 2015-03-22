@@ -265,6 +265,16 @@ AllowOverwrite          on
 </INLINE>
 </FILE>
 
+<FILE Name="&plg;/&name;.cfg">
+<INLINE>
+# &name; configuration:
+SERVICE="disable"
+WEBSRV="disable"
+WPATH=""
+WPORT=""
+</INLINE>
+</FILE>
+
 <FILE Name="&plg;/mountscript.sh">
 <INLINE>
 #!/bin/bash
