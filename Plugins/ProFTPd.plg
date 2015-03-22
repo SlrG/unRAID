@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2015.03.10.1">
+	<!ENTITY plgVersion			"2015.03.22">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
@@ -178,7 +178,7 @@ SlrG
 </FILE>
 
 <CHANGES>
-###2015-03-10
+###2015-03-22
 - version 1.0	: Re-written based on PhAzEs v2 plugins to run with Unraid 6 Plugin Manager
 ###2013-12-28
  - version 0.5k	: Removed SimpleFeatures recognition and added manual webserver configuration.
