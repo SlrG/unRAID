@@ -49,6 +49,12 @@ user3 will have access to dir_a and subdirectories but not to /mnt/cache/FTP or
 user4 will have access to dir_b and subdirectories but not to /mnt/cache/FTP or
       dir_a
 
+If you don't want to give users full access to your system but only to specific
+shares or directories, you can mount those to another dir and set this as the
+homedir for ftp access as described above. Mount and unmount commands should be
+placed in the mountscript.sh and unmountscript.sh files in the plugins directory.
+Examples on how to do that, are given in those files.
+
 So, what if this is not enough for you? Well, for a more fine grained control
 you may edit the /etc/proftpd.conf file. If you have a webserver with php
 installed and enabled, please point the plugin to its port and webroot.

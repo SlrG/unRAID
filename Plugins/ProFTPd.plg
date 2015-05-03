@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2015.03.22">
+	<!ENTITY plgVersion			"2015.05.03">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
@@ -51,38 +51,39 @@ List of files created by this plugin
 
 INSTALLED TO: /boot/config/plugins/ProFTPd
 
-mountscript.sh					-> This is used to mount directories on array start
-ProFTPd-PhAzE-Control.tar.gz	-> This holds the plugin files
-ProFTPd.cfg						-> The config file used by the plugin
-ProFTPd-PhAzE-Support.tar.gz	-> This holds the plugins dependency files
-proftpd.conf					-> The config file used by proftpd
-ConfEdit.tar.gz					-> This holds the proftpd config editor files
-unmountscript.sh				-> This is used to unmoung directories on array stop
+ConfEdit.tar.gz						-> This holds the proftpd config editor files
+ProFTPd-SlrG-Control-x.x.tar.gz		-> This holds the plugin files
+ProFTPd-SlrG-Dependency-x.x.tar.gz	-> This holds the plugins dependency files
+ProFTPd.cfg							-> The config file used by the plugin
+README								-> This contains the instructions on how to use the plugin
+mountscript.sh						-> This is used to mount directories on array start
+proftpd.conf						-> The config file used by proftpd
+unmountscript.sh					-> This is used to unmoung directories on array stop
 
 INSTALLED TO: $Webroot (if set)
-..								-> The proftpd config editor files
+..									-> The proftpd config editor files
 
 INSTALLED TO: /usr/local/emhttp/plugins/ProFTPd
 
-ProFTPd.page					-> This page points to the PHP file for the plugin GUI
-ProFTPd.css						-> This is some added CSS to keep the look and feel of the plugins across unraid versions
-ProFTPd.php						-> This is the PHP page for the plugin settings GUI
-ProFTPd.png						-> This is the applications icon
-device_status.png				-> This is an icon used in the settings page
-new_config.png					-> This is an icon used in the settings page
-information.png					-> This is an icon used in the settings page
-paypal.png						-> This is an image used in the settings page
-README.md						-> This is a text file that describes the application
-event/disks_mounted				-> Starts the application when the array is mounted
-event/unmounting_disks			-> Stops the application when the array is unmounted
+ProFTPd.page						-> This page points to the PHP file for the plugin GUI
+ProFTPd.css							-> This is some added CSS to keep the look and feel of the plugins across unraid versions
+ProFTPd.php							-> This is the PHP page for the plugin settings GUI
+ProFTPd.png							-> This is the applications icon
+device_status.png					-> This is an icon used in the settings page
+new_config.png						-> This is an icon used in the settings page
+information.png						-> This is an icon used in the settings page
+paypal.png							-> This is an image used in the settings page
+README.md							-> This is a text file that describes the application
+event/disks_mounted					-> Starts the application when the array is mounted
+event/unmounting_disks				-> Stops the application when the array is unmounted
 
 INSTALLED TO: /etc/rc.d
 
-rc.ProFTPd						-> This is the control file. The one that starts, stops, and installs the application
+rc.ProFTPd							-> This is the control file. The one that starts, stops, and installs the application
 
 INSTALLED TO: /usr/local/SlrG-Common/ProFTPd
 
-All dependency files			-> These are binaries and apps that are required to run the application
+All dependency files				-> These are binaries and apps that are required to run the application
 -->
 
 
@@ -139,6 +140,12 @@ user3 will have access to dir_a and subdirectories but not to /mnt/cache/FTP or
 user4 will have access to dir_b and subdirectories but not to /mnt/cache/FTP or
       dir_a
 
+If you don't want to give users full access to your system but only to specific
+shares or directories, you can mount those to another dir and set this as the
+homedir for ftp access as described above. Mount and unmount commands should be
+placed in the mountscript.sh and unmountscript.sh files in the plugins directory.
+Examples on how to do that, are given in those files.
+
 So, what if this is not enough for you? Well, for a more fine grained control
 you may edit the /etc/proftpd.conf file. If you have a webserver with php
 installed and enabled, please point the plugin to its port and webroot.
@@ -178,8 +185,10 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2015-05-03
+- version 1.0a	: Add information about mountscript.sh and unmountscript.sh to ProFTPd-README and README.
 ###2015-03-22
-- version 1.0	: Re-written based on PhAzEs v2 plugins to run with Unraid 6 Plugin Manager
+- version 1.0	: Re-written based on PhAzEs v2 plugins to run with Unraid 6 Plugin Manager.
 ###2013-12-28
  - version 0.5k	: Removed SimpleFeatures recognition and added manual webserver configuration.
 ###2013-11-13
