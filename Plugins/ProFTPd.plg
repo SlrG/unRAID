@@ -5,14 +5,15 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2015.05.03">
+	<!ENTITY plgVersion			"2015.09.15">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
+	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
-	<!ENTITY controlFILE		"&name;-&author;-Control-1.0.tar.gz">
-	<!ENTITY controlMD5			"5b0ccdcba5a2fbaee9f364247f5bebf0">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.1.tar.gz">
+	<!ENTITY controlMD5			"446ca241b8e0a56f0cdb957257e2ecb3">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"bb42dc9a9fa467c957416ed17b959c77">
@@ -56,9 +57,12 @@ ProFTPd-SlrG-Control-x.x.tar.gz		-> This holds the plugin files
 ProFTPd-SlrG-Dependency-x.x.tar.gz	-> This holds the plugins dependency files
 ProFTPd.cfg							-> The config file used by the plugin
 README								-> This contains the instructions on how to use the plugin
-mountscript.sh						-> This is used to mount directories on array start
 proftpd.conf						-> The config file used by proftpd
+
+INSTALLED TO: /boot/config/plugins/ProFTPd/scripts
+mountscript.sh						-> This is used to mount directories on array start
 unmountscript.sh					-> This is used to unmoung directories on array stop
+rc.ProFTPd							-> This is the control file. The one that starts, stops, and installs the application
 
 INSTALLED TO: $Webroot (if set)
 ..									-> The proftpd config editor files
@@ -79,7 +83,7 @@ event/unmounting_disks				-> Stops the application when the array is unmounted
 
 INSTALLED TO: /etc/rc.d
 
-rc.ProFTPd							-> This is the control file. The one that starts, stops, and installs the application
+rc.ProFTPd							-> Symlink to the control file in scripts.
 
 INSTALLED TO: /usr/local/SlrG-Common/ProFTPd
 
@@ -185,6 +189,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2015-09-14
+- version 1.1	: Fix startscripts for unRAID 6.1 compatibility.
 ###2015-05-03
 - version 1.0a	: Add information about mountscript.sh and unmountscript.sh to ProFTPd-README and README.
 ###2015-03-22
@@ -290,7 +296,7 @@ WPORT=""
 </INLINE>
 </FILE>
 
-<FILE Name="&plg;/mountscript.sh">
+<FILE Name="&pls;/mountscript.sh">
 <INLINE>
 #!/bin/bash
 # put your commands for creating mount points and mounting here
@@ -300,7 +306,7 @@ WPORT=""
 </INLINE>
 </FILE>
 
-<FILE Name="&plg;/unmountscript.sh">
+<FILE Name="&pls;/unmountscript.sh">
 <INLINE>
 #!/bin/bash
 # put your commands for unmounting and removing mount points here
@@ -335,12 +341,6 @@ if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 	if [ -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" ]; then
 		mv -f "/boot/config/plugins/${OLDNAME}-temp/${OLDNAME}.conf" "/boot/config/plugins/&name;/"
 	fi
-	if [ -f "/boot/config/plugins/${OLDNAME}-temp/mountscript.sh" ]; then
-		mv -f "/boot/config/plugins/${OLDNAME}-temp/mountscript.sh" "/boot/config/plugins/&name;/"
-	fi
-	if [ -f "/boot/config/plugins/${OLDNAME}-temp/unmountscript.sh" ]; then
-		mv -f "/boot/config/plugins/${OLDNAME}-temp/unmountscript.sh" "/boot/config/plugins/&name;/"
-	fi
 	sed -i "s_^PidFile.*_PidFile                 &pid;_g" "/boot/config/plugins/&name;/${OLDNAME}.conf"
 	rm -rf "/boot/config/plugins/$OLDNAME-temp"
 	[ -d "/usr/local/emhttp/plugins/$OLDNAME" ] &amp;&amp; rm -rf "/usr/local/emhttp/plugins/$OLDNAME"
@@ -349,6 +349,13 @@ if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 			/usr/local/sbin/plugin remove "${OLDNAME}_v6.plg"
 		fi
 	fi
+fi
+# Move existing mountscript/unmountscript to new location
+if [ -f "/boot/config/plugins/$name;/unmountscript.sh" ]; then
+	mv -f "/boot/config/plugins/$name;/unmountscript.sh" "&pls;/"
+fi
+if [ -f "/boot/config/plugins/$name;/mountscript.sh" ]; then
+	mv -f "/boot/config/plugins/$name;/mountscript.sh" "&pls;/"
 fi
 
 # Since this is a universal plugin for unraid, check if running 32 bit or 64 bit OS for dependencies
@@ -456,7 +463,6 @@ if [ ! -f "$DEPFILES" ] &amp;&amp; [ "$DEPMD5" != "" ]; then
 	if [ "$HASNET" == "yes" ]; then
 		mkdir -p /boot/config/plugins/&name;
 		wget --no-check-certificate -qO "$DEPFILES" "$DEPURL"
-		wget --no-check-certificate -qO "$DEPFILES" "$DEPURL"
 		if [ -f "$DEPFILES" ]; then
 			MD5TEST2=`echo "$DEPMD5  $DEPFILES" | md5sum --quiet --status -c - &amp;&amp; echo "1" || echo "0"`
 			if [ "$MD5TEST2" == "1" ]; then
@@ -521,6 +527,8 @@ if [ -f "$CTRLFILES" ]; then
 		echo "&lt;?php include '/usr/local/emhttp/plugins/&name;/include/&name;.php';?&gt;" &gt;&gt; "${TEMP1}/&name;.php"
 	fi
 	cp -Raf "/tmp/&name;-inst/install-A/." /
+	[ -e "/etc/rc.d/rc.&name;" ] &amp;&amp; rm -f "/etc/rc.d/rc.&name;"
+	ln -s "&pls;/rc.&name;" "/etc/rc.d/rc.&name;"
 else
 	echo "...Install failed, no plugin control files located. Exiting"
 	rm -f "/tmp/&name;-script"
@@ -560,7 +568,7 @@ if [ "$DEPMD5" != "" ]; then
 fi
 
 # Correct any ^M (Windows carriage characters) in the important files
-[ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; sed -i 's!\r!!g' "/etc/rc.d/rc.&name;"
+[ -f "/usr/local/emhttp/plugins/&name;/scripts/rc.&name;" ] &amp;&amp; sed -i 's!\r!!g' "/usr/local/emhttp/plugins/&name;/scripts/rc.&name;"
 [ -d "/usr/local/emhttp/plugins/&name;/event" ] &amp;&amp; sed -i 's!\r!!g' /usr/local/emhttp/plugins/&name;/event/*
 
 # Create /usr/local/var if it doesn't exist
@@ -590,7 +598,7 @@ if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
   fi
 fi
 
-/etc/rc.d/rc.ProFTPd start
+&pls;/rc.&name; start
 
 # Remove the temp install folder
 echo -e "\t Cleaning up temp files/folders"
@@ -615,13 +623,11 @@ echo "Uninstalling $displayName; plugin..."
 sleep 1
 
 # Stop the app if the control file exists
-if [ -f "/etc/rc.d/rc.&name;" ]; then
-	/etc/rc.d/rc.&name; stop
-fi
+[ -f "&pls;/rc.&name;" ] &amp;&amp; &pls;/rc.&name; stop
 sleep 1
 
 # Unjail users
-	/etc/rc.d/rc.&name; unjail
+&pls;/rc.&name; unjail
 
 # Check if ConfigEditor is installed and remove it...
 source "$CFGFILE"
