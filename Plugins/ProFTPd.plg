@@ -5,21 +5,21 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2015.09.15">
+	<!ENTITY plgVersion			"2015.12.08">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
-	<!ENTITY controlFILE		"&name;-&author;-Control-1.1.tar.gz">
-	<!ENTITY controlMD5			"446ca241b8e0a56f0cdb957257e2ecb3">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.2.tar.gz">
+	<!ENTITY controlMD5			"bfb4d31d59e95d2d92f3db9ef45ee534">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"bb42dc9a9fa467c957416ed17b959c77">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
-	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.0_x64.tar.gz">
-	<!ENTITY dependencyMD564	"9c3da99c7a40dfc0428b39f3bce747c3">
+	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.1_x64.tar.gz">
+	<!ENTITY dependencyMD564	"911ffd012044e3379e4474d18c662129">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
@@ -58,10 +58,10 @@ ProFTPd-SlrG-Dependency-x.x.tar.gz	-> This holds the plugins dependency files
 ProFTPd.cfg							-> The config file used by the plugin
 README								-> This contains the instructions on how to use the plugin
 proftpd.conf						-> The config file used by proftpd
-
-INSTALLED TO: /boot/config/plugins/ProFTPd/scripts
 mountscript.sh						-> This is used to mount directories on array start
 unmountscript.sh					-> This is used to unmoung directories on array stop
+
+INSTALLED TO: /boot/config/plugins/ProFTPd/scripts
 rc.ProFTPd							-> This is the control file. The one that starts, stops, and installs the application
 
 INSTALLED TO: $Webroot (if set)
@@ -296,7 +296,7 @@ WPORT=""
 </INLINE>
 </FILE>
 
-<FILE Name="&pls;/mountscript.sh">
+<FILE Name="&plg;/mountscript.sh">
 <INLINE>
 #!/bin/bash
 # put your commands for creating mount points and mounting here
@@ -306,7 +306,7 @@ WPORT=""
 </INLINE>
 </FILE>
 
-<FILE Name="&pls;/unmountscript.sh">
+<FILE Name="&plg;/unmountscript.sh">
 <INLINE>
 #!/bin/bash
 # put your commands for unmounting and removing mount points here
@@ -349,13 +349,6 @@ if [ "$DIREXISTS" == "/boot/config/plugins/$OLDNAME" ]; then
 			/usr/local/sbin/plugin remove "${OLDNAME}_v6.plg"
 		fi
 	fi
-fi
-# Move existing mountscript/unmountscript to new location
-if [ -f "/boot/config/plugins/$name;/unmountscript.sh" ]; then
-	mv -f "/boot/config/plugins/$name;/unmountscript.sh" "&pls;/"
-fi
-if [ -f "/boot/config/plugins/$name;/mountscript.sh" ]; then
-	mv -f "/boot/config/plugins/$name;/mountscript.sh" "&pls;/"
 fi
 
 # Since this is a universal plugin for unraid, check if running 32 bit or 64 bit OS for dependencies
