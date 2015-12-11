@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2015.12.08">
+	<!ENTITY plgVersion			"2015.12.11">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
@@ -189,6 +189,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2015-12-11
+- version 1.1a	: Fix persistance of mountscript and unmountscript and bumped ProFTPd version for 64 bit systems to v1.3.6rc1.
 ###2015-09-14
 - version 1.1	: Fix startscripts for unRAID 6.1 compatibility.
 ###2015-05-03
