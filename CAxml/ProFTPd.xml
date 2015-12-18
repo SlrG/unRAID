@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Containers>
+<Plugin>True</Plugin>
+<PluginURL>https://raw.githubusercontent.com/SlrG/unRAID/master/Plugins/ProFTPd.plg</PluginURL>
+<PluginAuthor>SlrG</PluginAuthor>
+<Beta>False</Beta>
+<Category>Network:FTP</Category>
+<Name>ProFTPd</Name>
+<Description>
+ProFTPD is among the most popular FTP servers in Unix-like environments today. Compared to those, which focus e.g. on simplicity, speed or security, ProFTPD's primary design goal is to be a highly feature rich FTP server, exposing a large amount of configuration options to the user.
+</Description>
+<Support>http://lime-technology.com/forum/index.php?topic=25695.0</Support>
+<Icon>http://ngadimin.com/wp-content/uploads/2009/08/proftpd.png</Icon>
+<Project>http://www.proftpd.org/</Project>
+</Containers>
