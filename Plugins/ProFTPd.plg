@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2015.12.11">
+	<!ENTITY plgVersion			"2015.12.21">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
@@ -189,6 +189,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2015-12-21
+- version 1.1b	: Add creation of locale folder to fix config saving in the config editor and fix proftpd.delay problem.
 ###2015-12-11
 - version 1.1a	: Fix persistance of mountscript and unmountscript and bumped ProFTPd version for 64 bit systems to v1.3.6rc1.
 ###2015-09-14
@@ -568,6 +570,12 @@ fi
 
 # Create /usr/local/var if it doesn't exist
 [ ! -d "/usr/local/var" ] &amp;&amp; mkdir /usr/local/var
+
+# Create proftpd.delay if it doesn't exist
+[ ! -f "/usr/local/var/proftpd.delay" ] &amp;&amp; touch /usr/local/var/proftpd.delay
+
+# Create /usr/local/share/locale if it doesn't exist
+[ ! -d "/usr/local/share/locale" ] &amp;&amp; mkdir /usr/local/share/locale
 
 #detect if run on boot
 if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
