@@ -12,4 +12,7 @@ ProFTPd is among the most popular FTP servers in Unix-like environments today. C
 <Support>http://lime-technology.com/forum/index.php?topic=25695.0</Support>
 <Icon>http://ngadimin.com/wp-content/uploads/2009/08/proftpd.png</Icon>
 <Project>http://www.proftpd.org/</Project>
+<DonateText>Support the plugin?</DonateText>
+<DonateLink>https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=TBVJLE525C5SJ</DonateLink>
+<DonateImg>https://raw.githubusercontent.com/SlrG/unRAID/master/AppSupport/ProFTPd/paypal.gif</DonateImg>
 </Containers>
