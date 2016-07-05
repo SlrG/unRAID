@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2015.12.21">
+	<!ENTITY plgVersion			"2016.06.05">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
@@ -18,8 +18,8 @@
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
 	<!ENTITY dependencyMD5		"bb42dc9a9fa467c957416ed17b959c77">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
-	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.1_x64.tar.gz">
-	<!ENTITY dependencyMD564	"911ffd012044e3379e4474d18c662129">
+	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.2_x64.tar.gz">
+	<!ENTITY dependencyMD564	"82e404aa248fbfb291355713460a0195">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
@@ -189,6 +189,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2016-06-05
+- version 1.2	: Bumped ProFTPd version for 64 bit systems to v1.3.6rc2 and fixed mod_lang error due to missing locale files.
 ###2015-12-21
 - version 1.1b	: Add creation of locale folder to fix config saving in the config editor and fix proftpd.delay problem.
 ###2015-12-11
