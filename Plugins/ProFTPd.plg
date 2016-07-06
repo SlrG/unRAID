@@ -5,15 +5,15 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2016.06.06">
+	<!ENTITY plgVersion			"2016.06.06.1">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
-	<!ENTITY controlFILE		"&name;-&author;-Control-1.3.tar.gz">
-	<!ENTITY controlMD5			"49d81edc4bad1ee04b3fe3f7bce9f0ed">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.4.tar.gz">
+	<!ENTITY controlMD5			"29bd1c8800a80e81c96b5927f4ace3ad">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
 	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
@@ -190,6 +190,7 @@ SlrG
 
 <CHANGES>
 ###2016-06-06
+- version 1.2b	: Fixed stupid error in rc.ProFTPd
 - version 1.2a	: Fixed mod_lang error and ConfigEditor installation problem.
 ###2016-06-05
 - version 1.2	: Bumped ProFTPd version for 64 bit systems to v1.3.6rc2.
@@ -579,7 +580,7 @@ fi
 [ ! -f "/usr/local/var/proftpd.delay" ] &amp;&amp; touch /usr/local/var/proftpd.delay
 
 # Symlink /usr/local/share/locale if it doesn't exist
-[ ! -d "/usr/local/share/locale" ] &amp;&amp; ln -s /usr/local/SlrG-Common/usr/local/share /usr/local/share
+[ ! -d "/usr/local/share/locale" ] &amp;&amp; ln -s &commonDIR;/usr/local/share /usr/local/share
 
 #detect if run on boot
 if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
