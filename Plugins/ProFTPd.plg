@@ -5,21 +5,21 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2016.06.05">
+	<!ENTITY plgVersion			"2016.06.06">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
-	<!ENTITY controlFILE		"&name;-&author;-Control-1.2.tar.gz">
-	<!ENTITY controlMD5			"bfb4d31d59e95d2d92f3db9ef45ee534">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.3.tar.gz">
+	<!ENTITY controlMD5			"49d81edc4bad1ee04b3fe3f7bce9f0ed">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
-	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.0_x86.tar.gz">
-	<!ENTITY dependencyMD5		"bb42dc9a9fa467c957416ed17b959c77">
+	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
+	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
-	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.2_x64.tar.gz">
-	<!ENTITY dependencyMD564	"82e404aa248fbfb291355713460a0195">
+	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.3_x64.tar.gz">
+	<!ENTITY dependencyMD564	"a1b956d60cd399e26940fd012f31bcb6">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
@@ -189,8 +189,10 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2016-06-06
+- version 1.2a	: Fixed mod_lang error and ConfigEditor installation problem.
 ###2016-06-05
-- version 1.2	: Bumped ProFTPd version for 64 bit systems to v1.3.6rc2 and fixed mod_lang error due to missing locale files.
+- version 1.2	: Bumped ProFTPd version for 64 bit systems to v1.3.6rc2.
 ###2015-12-21
 - version 1.1b	: Add creation of locale folder to fix config saving in the config editor and fix proftpd.delay problem.
 ###2015-12-11
@@ -576,8 +578,8 @@ fi
 # Create proftpd.delay if it doesn't exist
 [ ! -f "/usr/local/var/proftpd.delay" ] &amp;&amp; touch /usr/local/var/proftpd.delay
 
-# Create /usr/local/share/locale if it doesn't exist
-[ ! -d "/usr/local/share/locale" ] &amp;&amp; mkdir /usr/local/share/locale
+# Symlink /usr/local/share/locale if it doesn't exist
+[ ! -d "/usr/local/share/locale" ] &amp;&amp; ln -s /usr/local/SlrG-Common/usr/local/share /usr/local/share
 
 #detect if run on boot
 if [[ -n $(sed -n '/^ftp/p' /etc/inetd.conf) ]]; then
@@ -672,7 +674,7 @@ fi
 
 # Clear /usr/local/var from plugin files
 [ -f /usr/local/var/proftpd.* ] &amp;&amp; rm -f /usr/local/var/proftpd.*
-
+[[ -L "/usr/local/share" &amp;&amp; -d "/usr/local/share" ]] &amp;&amp; rm -f /usr/local/share
 [ -d "/usr/local/emhttp/plugins/&name;" ] &amp;&amp; rm -fR "/usr/local/emhttp/plugins/&name;"
 [ -f "/etc/rc.d/rc.&name;" ] &amp;&amp; rm -f "/etc/rc.d/rc.&name;"
 [ -e "/var/log/plugins/&name;.plg" ] &amp;&amp; rm -f "/var/log/plugins/&name;.plg"
