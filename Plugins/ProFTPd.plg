@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2017.07.12">
+	<!ENTITY plgVersion			"2017.07.19">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
@@ -18,8 +18,8 @@
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
 	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
-	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.4_x64.tar.gz">
-	<!ENTITY dependencyMD564	"fed69a012e8ffb6f0627a98f26dac954">
+	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.5_x64.tar.gz">
+	<!ENTITY dependencyMD564	"840b40f520e423448f76bdb62a2644a7">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
@@ -189,6 +189,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2017-07-19
+- version 1.3a	: Fixed reference to old config editor.
 ###2017-07-12
 - version 1.3	: Bumped ProFTPd version for 64 bit systems to v1.3.6 and fixed install bug when unRAIDs internel webserver is disabled.
 ###2016-06-06
