@@ -5,15 +5,15 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2017.07.19">
+	<!ENTITY plgVersion			"2018.02.05.1">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
-	<!ENTITY controlFILE		"&name;-&author;-Control-1.4.tar.gz">
-	<!ENTITY controlMD5			"29bd1c8800a80e81c96b5927f4ace3ad">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.5.tar.gz">
+	<!ENTITY controlMD5			"f331458d4962b371c59f411e68162b2d">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
 	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
@@ -189,6 +189,10 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2018-02-05.1
+- version 1.3c	: Fixed bug introduced by latest icon location change.
+###2018-02-05
+- version 1.3b	: Changed icon location for unRAID 6.4 compatibility.
 ###2017-07-19
 - version 1.3a	: Fixed reference to old config editor.
 ###2017-07-12
