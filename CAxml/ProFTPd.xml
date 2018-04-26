@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Containers>
 <Plugin>True</Plugin>
-<PluginURL>https://raw.githubusercontent.com/SlrG/unRAID/master/Plugins/ProFTPd.plg</PluginURL>
+<PluginURL>https://github.com/SlrG/unRAID/raw/master/Plugins/ProFTPd.plg</PluginURL>
 <PluginAuthor>SlrG</PluginAuthor>
 <Beta>False</Beta>
 <Category>Network:FTP</Category>
