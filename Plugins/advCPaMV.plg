@@ -1,0 +1,132 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+	<!ENTITY name				"advCPaMV">
+	<!ENTITY displayName		"ProFTPd">
+	<!ENTITY author				"SlrG">
+	<!ENTITY authorName			"Michael Wehr">
+	<!ENTITY plgVersion			"2019.04.21">
+	<!ENTITY md5 				"47a3daf346b694e0ea041b84c0910eae">
+	<!ENTITY pld				"/boot/config/plugins">
+	<!ENTITY plg				"&pld;/&name;">
+	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
+	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
+>
+
+<PLUGIN
+	name="&name;"
+	author="&author;"
+	version="&plgVersion;"
+	pluginURL="&pluginURL;"
+>
+
+<!--
+=========================================================================
+License
+=========================================================================
+
+GNU General Public License v3 (GPL v3)
+
+=========================================================================
+Description
+=========================================================================
+
+This plugin provides advanced cp and mv alternatives named gcp and gmv
+that were created by applying the advcpmv-0.7-8.25.patch (from here:
+https://github.com/atdt/advcpmv)
+on the coreutils version 8.31 used by unRAID v6.7
+
+=========================================================================
+List of files created by this plugin
+=========================================================================
+
+INSTALLED TO: /boot/config/plugins/advCPaMV
+
+advCPaMV-&plgVersion;
+gcp
+gmv
+README
+
+SYMLINKED TO: /usr/local/bin
+gcp
+gmv
+-->
+
+
+<FILE Name="&plg;/README">
+<INLINE>
+=========================================================================
+README
+=========================================================================
+                                Credits:
+                             **************
+Great thanks go to Limetech for giving us unRAID.
+                             **************
+
+This plugin provides advanced cp and mv alternatives named gcp and gmv
+that were created by applying the advcpmv-0.7-8.25.patch (from here:
+https://github.com/atdt/advcpmv)
+on the coreutils version 8.31 used by unRAID v6.7.
+
+SlrG
+-->
+</INLINE>
+</FILE>
+
+<CHANGES>
+###2019-04-21
+- First release
+</CHANGES>
+
+<!-- pre install - remove old files -->
+<FILE Run="/bin/bash">
+	<INLINE>
+	rm -f $(ls &plg;/&name;*.txz 2&gt;/dev/null|grep -v '&plgVersion;')
+	</INLINE>
+</FILE>
+
+<!-- install part 1 -->
+<FILE Name="&plg;/&name;-&plgVersion;.txz" Run="upgradepkg --install-new">
+    <URL>&ghm;/archive/&name;-&plgVersion;.txz</URL>
+    <MD5>&md5;</MD5>
+</FILE>
+
+<!-- install part 2 -->
+<FILE Run="/bin/bash">
+	<INLINE>
+    ln -s &plg;/gcp /usr/local/bin/gcp
+    ln -s &plg;/gmv /usr/local/bin/gmv
+	</INLINE>
+</FILE>
+
+<!-- post install -->
+<FILE Run="/bin/bash">
+	<INLINE>
+	echo ""
+	echo "----------------------------------------------------"
+	echo " &name; has been installed."
+	echo " Copyright 2019, &autorName;"
+	echo " Version: &plgVersion;"
+	echo "----------------------------------------------------"
+	echo ""
+	</INLINE>
+</FILE>
+
+<!-- uninstall -->
+<FILE Run="/bin/bash" Method="remove">
+	<INLINE>
+	rm -rf &pld;
+	rm -f &plg;
+	rm -f /usr/local/bin/gcp
+	rm -f /usr/local/bin/gmv
+	echo ""
+	echo "----------------------------------------------------"
+	echo " &name; has been removed."
+	echo " Copyright 2019, &autorName;"
+	echo " Version: &plgVersion;"
+	echo "----------------------------------------------------"
+	echo ""
+	</INLINE>
+</FILE>
+
+</PLUGIN>

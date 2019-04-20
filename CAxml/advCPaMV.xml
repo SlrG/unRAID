@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Containers>
+<Plugin>True</Plugin>
+<PluginURL>https://github.com/SlrG/unRAID/raw/master/Plugins/advCPaMV.plg</PluginURL>
+<PluginAuthor>SlrG</PluginAuthor>
+<Beta>False</Beta>
+<Category>Tools:System</Category>
+<Name>advCPaMV</Name>
+<Description>
+This plugin provides advanced cp and mv alternatives named gcp and gmv
+that were created by applying the advcpmv-0.7-8.25.patch (from here:
+https://github.com/atdt/advcpmv)
+on the coreutils version 8.31 used by unRAID v6.7.
+</Description>
+<Support></Support>
+<Icon></Icon>
+<Project></Project>
+<DonateText>Support the plugin?</DonateText>
+<DonateLink>https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9TBZUM8QHDZAA&amp;source=url</DonateLink>
+<DonateImg>https://raw.githubusercontent.com/SlrG/unRAID/master/AppSupport/paypal.gif</DonateImg>
+</Containers>
