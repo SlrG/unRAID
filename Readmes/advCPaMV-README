@@ -1,0 +1,14 @@
+=========================================================================
+README
+=========================================================================
+                                Credits:
+                             **************
+Great thanks go to Limetech for giving us unRAID.
+                             **************
+
+This plugin provides advanced cp and mv alternatives named gcp and gmv
+that were created by applying the advcpmv-0.7-8.25.patch (from here:
+https://github.com/atdt/advcpmv)
+on the coreutils version 8.31 used by unRAID v6.7
+
+SlrG
