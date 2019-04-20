@@ -1,6 +1,6 @@
 # unRAID
 This repository contains rewritten versions of my unRAID plugins.
-They are heavily inspired by PhAzEs excellent plugins and should
-therefore work for unRAID v5 and v6.
+The compatibility for unRAID v5 will soon be dropped and v6 and
+onward supported only.
 
 SlrG
