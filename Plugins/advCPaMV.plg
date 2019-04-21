@@ -5,7 +5,7 @@
 	<!ENTITY displayName        "ProFTPd">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
-	<!ENTITY plgVersion         "2019.04.21">
+	<!ENTITY plgVersion         "2019.04.21.1">
 	<!ENTITY md5                "eb1ec93765f29dd759fe50f5972cb7dc">
 	<!ENTITY pld                "/boot/config/plugins">
 	<!ENTITY plg                "&pld;/&name;">
@@ -71,6 +71,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2019-04-21.1
+- Bugfixes
 ###2019-04-21
 - First release
 </CHANGES>
@@ -94,7 +96,7 @@ SlrG
 	echo ""
 	echo "----------------------------------------------------"
 	echo " &name; has been installed."
-	echo " Copyright 2019, &autorName;"
+	echo " Copyright 2019, &author;"
 	echo " Version: &plgVersion;"
 	echo "----------------------------------------------------"
 	echo ""
@@ -111,7 +113,7 @@ SlrG
 	echo ""
 	echo "----------------------------------------------------"
 	echo " &name; has been removed."
-	echo " Copyright 2019, &autorName;"
+	echo " Copyright 2019, &author;"
 	echo " Version: &plgVersion;"
 	echo "----------------------------------------------------"
 	echo ""
