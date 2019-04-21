@@ -1,17 +1,17 @@
 <?xml version='1.0' standalone='yes'?>
 
 <!DOCTYPE PLUGIN [
-	<!ENTITY name				"advCPaMV">
-	<!ENTITY displayName		"ProFTPd">
-	<!ENTITY author				"SlrG">
-	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2019.04.21">
-	<!ENTITY md5 				"47a3daf346b694e0ea041b84c0910eae">
-	<!ENTITY pld				"/boot/config/plugins">
-	<!ENTITY plg				"&pld;/&name;">
-	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
-	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
->
+	<!ENTITY name               "advCPaMV">
+	<!ENTITY displayName        "ProFTPd">
+	<!ENTITY author             "SlrG">
+	<!ENTITY authorName         "Michael Wehr">
+	<!ENTITY plgVersion         "2019.04.21">
+	<!ENTITY md5                "eb1ec93765f29dd759fe50f5972cb7dc">
+	<!ENTITY pld                "/boot/config/plugins">
+	<!ENTITY plg                "&pld;/&name;">
+	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/master">
+	<!ENTITY pluginURL          "&ghm;/Plugins/&name;.plg">
+]>
 
 <PLUGIN
 	name="&name;"
@@ -43,11 +43,9 @@ List of files created by this plugin
 INSTALLED TO: /boot/config/plugins/advCPaMV
 
 advCPaMV-&plgVersion;
-gcp
-gmv
 README
 
-SYMLINKED TO: /usr/local/bin
+INSTALLED TO: /usr/local/bin
 gcp
 gmv
 -->
@@ -69,7 +67,6 @@ https://github.com/atdt/advcpmv)
 on the coreutils version 8.31 used by unRAID v6.7.
 
 SlrG
--->
 </INLINE>
 </FILE>
 
@@ -85,18 +82,10 @@ SlrG
 	</INLINE>
 </FILE>
 
-<!-- install part 1 -->
+<!-- install -->
 <FILE Name="&plg;/&name;-&plgVersion;.txz" Run="upgradepkg --install-new">
-    <URL>&ghm;/archive/&name;-&plgVersion;.txz</URL>
+    <URL>&ghm;/AppSupport/&name;/&name;-&plgVersion;.txz</URL>
     <MD5>&md5;</MD5>
-</FILE>
-
-<!-- install part 2 -->
-<FILE Run="/bin/bash">
-	<INLINE>
-    ln -s &plg;/gcp /usr/local/bin/gcp
-    ln -s &plg;/gmv /usr/local/bin/gmv
-	</INLINE>
 </FILE>
 
 <!-- post install -->
