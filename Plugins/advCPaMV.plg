@@ -5,8 +5,8 @@
 	<!ENTITY displayName        "ProFTPd">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
-	<!ENTITY plgVersion         "2019.04.21.2">
-	<!ENTITY md5                "eb1ec93765f29dd759fe50f5972cb7dc">
+	<!ENTITY plgVersion         "2019.04.22">
+	<!ENTITY md5                "19002c6daa92c114089773b0aff4a25a">
 	<!ENTITY pld                "/boot/config/plugins">
 	<!ENTITY plg                "&pld;/&name;">
 	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/master">
@@ -110,6 +110,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2019-04-22
+- icon
 ###2019-04-21.2
 - additional explanations
 ###2019-04-21.1
