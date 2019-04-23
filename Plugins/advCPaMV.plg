@@ -5,7 +5,7 @@
 	<!ENTITY displayName        "Advanced Copy and Move">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
-	<!ENTITY plgVersion         "2019.04.23.2">
+	<!ENTITY plgVersion         "2019.04.23.3">
 	<!ENTITY icon               "terminal">
 	<!ENTITY md5                "50a5c37f58cf49f2b61cdc3a9053a3e2">
 	<!ENTITY pld                "/boot/config/plugins">
@@ -13,7 +13,7 @@
 	<!ENTITY epld               "/usr/local/emhttp/plugins/&name;">
 	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL          "&ghm;/Plugins/&name;.plg">
-	<!ENTITY supportURL         "">
+	<!ENTITY supportURL         "https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v667-and-later/">
 ]>
 
 <PLUGIN
@@ -26,6 +26,8 @@
 >
 
 <CHANGES>
+###2019.04.23.3
+- public release
 ###2019.04.23.2
 - final icon
 ###2019.04.23.1
@@ -73,14 +75,14 @@ README
 Great thanks go to Limetech for giving us unRAID.
                              **************
 
-This plugin provides advanced cp and mv alternatives named gcp and gmv
-that were created by applying the advcpmv-0.7-8.25.patch (from here:
-https://github.com/atdt/advcpmv)
+This plugin provides advanced cp and mv shell command alternatives named
+gcp and gmv that were created by applying the advcpmv-0.7-8.25.patch
+(from here: https://github.com/atdt/advcpmv)
 on the coreutils version used by unRAID.
 
 But what does it do?
 
-gcp and gmv are the normal cp and mv commands extended to support
+gcp and gmv are the normal cp and mv shell commands extended to support
 the parameters -g or --progress-bar, which will show the progress of
 the copy or move commands.
 
@@ -131,7 +133,6 @@ SlrG
 <FILE Run="/bin/bash" Method="remove">
 	<INLINE>
 	rm -rf &plg;
-	rm -f &pld;/&name;.plg
 	rm -f /usr/local/bin/gcp
 	rm -f /usr/local/bin/gmv
     rm -rf &epld;
