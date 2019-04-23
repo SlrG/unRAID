@@ -5,9 +5,9 @@
 	<!ENTITY displayName        "Advanced Copy and Move">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
-	<!ENTITY plgVersion         "2019.04.23.3">
+	<!ENTITY plgVersion         "2019.04.23.4">
 	<!ENTITY icon               "terminal">
-	<!ENTITY md5                "50a5c37f58cf49f2b61cdc3a9053a3e2">
+	<!ENTITY md5                "aaf3e248751a8402bdfdef4354a00673">
 	<!ENTITY pld                "/boot/config/plugins">
 	<!ENTITY plg                "&pld;/&name;">
 	<!ENTITY epld               "/usr/local/emhttp/plugins/&name;">
@@ -26,6 +26,8 @@
 >
 
 <CHANGES>
+###2019.04.23.4
+- change short plugin description
 ###2019.04.23.3
 - public release
 ###2019.04.23.2
