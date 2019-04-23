@@ -133,6 +133,10 @@ SlrG
 <FILE Run="/bin/bash" Method="remove">
 	<INLINE>
 	removepkg &plg;/&name;-&plgVersion;.txz
+	[ -d &plg; ] &amp;&amp; rm -rf &plg;
+	[ -f /usr/local/bin/gcp ] &amp;&amp; rm -f /usr/local/bin/gcp
+	[ -f /usr/local/bin/gmv ] &amp;&amp; rm -f /usr/local/bin/gmv
+    [ -d &eplg; ] &amp;&amp; rm -rf &epld;
 	echo ""
 	echo "----------------------------------------------------"
 	echo " &name; has been removed."
