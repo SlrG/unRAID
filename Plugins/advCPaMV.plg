@@ -152,7 +152,7 @@ SlrG
 <FILE Run="/bin/bash" Method="remove">
 	<INLINE>
 	rm -rf &plg;
-	rm -f &pld;/&name;.plg;
+	rm -f &pld;/&name;.plg
 	rm -f /usr/local/bin/gcp
 	rm -f /usr/local/bin/gmv
 	echo ""
