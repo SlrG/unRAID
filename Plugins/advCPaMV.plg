@@ -10,6 +10,7 @@
 	<!ENTITY md5                "50a5c37f58cf49f2b61cdc3a9053a3e2">
 	<!ENTITY pld                "/boot/config/plugins">
 	<!ENTITY plg                "&pld;/&name;">
+	<!ENTITY epld               "/usr/local/emhttp/plugins/&name;">
 	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL          "&ghm;/Plugins/&name;.plg">
 	<!ENTITY supportURL         "">
@@ -133,6 +134,7 @@ SlrG
 	rm -f &pld;/&name;.plg
 	rm -f /usr/local/bin/gcp
 	rm -f /usr/local/bin/gmv
+    rm -rf &epld;
 	echo ""
 	echo "----------------------------------------------------"
 	echo " &name; has been removed."
