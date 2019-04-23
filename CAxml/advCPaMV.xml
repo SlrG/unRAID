@@ -32,7 +32,7 @@ And afterwards it will show a summary of the copy process:
 5 files (  5.0 GiB) copied in 44.5 seconds (115.2 MiB/s).
 </Description>
 <Support>https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v667-and-later/</Support>
-<Icon></Icon>
+<Icon>https://github.com/SlrG/unRAID/raw/master/AppSupport/advCPaMV/advCPaMV.png</Icon>
 <IconFA>terminal</IconFA>
 <Project>https://github.com/atdt/advcpmv/</Project>
 <DonateText>Support the plugin?</DonateText>
