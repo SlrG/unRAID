@@ -2,7 +2,7 @@
 
 <!DOCTYPE PLUGIN [
 	<!ENTITY name               "advCPaMV">
-	<!ENTITY displayName        "ProFTPd">
+	<!ENTITY displayName        "Advanced Copy and Move">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
 	<!ENTITY plgVersion         "2019.04.23">
