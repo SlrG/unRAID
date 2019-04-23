@@ -5,9 +5,9 @@
 	<!ENTITY displayName        "Advanced Copy and Move">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
-	<!ENTITY plgVersion         "2019.04.23.1">
+	<!ENTITY plgVersion         "2019.04.23.2">
 	<!ENTITY icon               "terminal">
-	<!ENTITY md5                "19002c6daa92c114089773b0aff4a25a">
+	<!ENTITY md5                "50a5c37f58cf49f2b61cdc3a9053a3e2">
 	<!ENTITY pld                "/boot/config/plugins">
 	<!ENTITY plg                "&pld;/&name;">
 	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/master">
@@ -25,6 +25,8 @@
 >
 
 <CHANGES>
+###2019.04.23.2
+- final icon
 ###2019.04.23.1
 - restructuring
 ###2019.04.23

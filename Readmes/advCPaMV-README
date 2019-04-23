@@ -9,6 +9,25 @@ Great thanks go to Limetech for giving us unRAID.
 This plugin provides advanced cp and mv alternatives named gcp and gmv
 that were created by applying the advcpmv-0.7-8.25.patch (from here:
 https://github.com/atdt/advcpmv)
-on the coreutils version 8.31 used by unRAID v6.7
+on the coreutils version used by unRAID.
+
+But what does it do?
+
+gcp and gmv are the normal cp and mv commands extended to support
+the parameters -g or --progress-bar, which will show the progress of
+the copy or move commands.
+
+It will look like this while in progress:
+gcp -rg temp/ temp1
+
+2 files copied so far...                             3.0 GiB /   5.0 GiB
+[================================>                              ] 60.0 %
+Copying at   2.6 GiB/s (about 0h 0m 12s remaining)
+temp/file2.txt                                       1.0 GiB /   1.0 GiB
+[=============================================================> ] 99.9 %
+
+And afterwards it will show a summary of the copy process:
+
+5 files (  5.0 GiB) copied in 44.5 seconds (115.2 MiB/s).
 
 SlrG
