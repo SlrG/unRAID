@@ -112,8 +112,8 @@ SlrG
 
 <!-- install -->
 <FILE Name="&plg;/&name;-&plgVersion;.txz" Run="upgradepkg --install-new">
-    <URL>&ghm;/AppSupport/&name;/&name;-&plgVersion;.txz</URL>
-    <MD5>&md5;</MD5>
+	<URL>&ghm;/AppSupport/&name;/&name;-&plgVersion;.txz</URL>
+	<MD5>&md5;</MD5>
 </FILE>
 
 <!-- post install -->
@@ -136,7 +136,7 @@ SlrG
 	[ -d &plg; ] &amp;&amp; rm -rf &plg;
 	[ -f /usr/local/bin/gcp ] &amp;&amp; rm -f /usr/local/bin/gcp
 	[ -f /usr/local/bin/gmv ] &amp;&amp; rm -f /usr/local/bin/gmv
-    [ -d &epld; ] &amp;&amp; rm -rf &epld;
+	[ -d &epld; ] &amp;&amp; rm -rf &epld;
 	echo ""
 	echo "----------------------------------------------------"
 	echo " &name; has been removed."
