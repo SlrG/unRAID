@@ -5,7 +5,7 @@
 	<!ENTITY displayName        "ProFTPd">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
-	<!ENTITY plgVersion         "2019.04.22">
+	<!ENTITY plgVersion         "2019.04.23">
 	<!ENTITY md5                "19002c6daa92c114089773b0aff4a25a">
 	<!ENTITY pld                "/boot/config/plugins">
 	<!ENTITY plg                "&pld;/&name;">
@@ -110,6 +110,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2019.04.23
+- bugfix in uninstall script
 ###2019.04.22
 - icon
 ###2019.04.21.2
@@ -149,8 +151,8 @@ SlrG
 <!-- uninstall -->
 <FILE Run="/bin/bash" Method="remove">
 	<INLINE>
-	rm -rf &pld;
-	rm -f &plg;
+	rm -rf &plg;
+	rm -f &pld;/&name;.plg;
 	rm -f /usr/local/bin/gcp
 	rm -f /usr/local/bin/gmv
 	echo ""
