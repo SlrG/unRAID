@@ -132,10 +132,7 @@ SlrG
 <!-- uninstall -->
 <FILE Run="/bin/bash" Method="remove">
 	<INLINE>
-	rm -rf &plg;
-	rm -f /usr/local/bin/gcp
-	rm -f /usr/local/bin/gmv
-    rm -rf &epld;
+	removepkg &plg;/&name;-&plgVersion;.txz
 	echo ""
 	echo "----------------------------------------------------"
 	echo " &name; has been removed."
