@@ -7,29 +7,9 @@
 <Category>Tools:System</Category>
 <Name>Advanced Copy and Move</Name>
 <Description>
-This plugin provides advanced cp and mv shell commnd alternatives named
-gcp and gmv that were created by applying the advcpmv-0.7-8.25.patch
-(from here: https://github.com/atdt/advcpmv)
-on the coreutils version used by unRAID.
-
-But what does it do?
-
-gcp and gmv are the normal cp and mv shell commands extended to support
-the parameters -g or --progress-bar, which will show the progress of
-the copy or move commands.
-
-It will look like this while in progress:
-gcp -rg temp/ temp1
-
-2 files copied so far...                             3.0 GiB /   5.0 GiB
-[================================>                              ] 60.0 %
-Copying at   2.6 GiB/s (about 0h 0m 12s remaining)
-temp/file2.txt                                       1.0 GiB /   1.0 GiB
-[=============================================================> ] 99.9 %
-
-And afterwards it will show a summary of the copy process:
-
-5 files (  5.0 GiB) copied in 44.5 seconds (115.2 MiB/s).
+This plugin provides advanced cp and mv shell command alternatives named
+gcp and gmv. When using the -g or --progress-bar parameters they will
+show the progress of the copy or move commands.
 </Description>
 <Support>https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v667-and-later/</Support>
 <Icon>https://github.com/SlrG/unRAID/raw/master/AppSupport/advCPaMV/advCPaMV.png</Icon>
