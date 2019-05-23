@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2018.02.05.1">
+	<!ENTITY plgVersion			"2019.05.23">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
@@ -189,6 +189,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2019-05-23
+- version 1.4	: Recompile of ProFTPd to work on unRAID 6.7. It probably will break compatibility for older versions.
 ###2018-02-05.1
 - version 1.3c	: Fixed bug introduced by latest icon location change.
 ###2018-02-05
