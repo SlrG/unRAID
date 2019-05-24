@@ -29,6 +29,7 @@
 	author="&author;"
 	version="&plgVersion;"
 	pluginURL="&pluginURL;"
+    min="6.7.0" 
 >
 
 <!--
