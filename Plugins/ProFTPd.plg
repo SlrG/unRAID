@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2019.05.23">
+	<!ENTITY plgVersion			"2019.05.26">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
@@ -18,8 +18,8 @@
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
 	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
-	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.5_x64.tar.gz">
-	<!ENTITY dependencyMD564	"840b40f520e423448f76bdb62a2644a7">
+	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.7_x64.tar.gz">
+	<!ENTITY dependencyMD564	"0f72b8f09879a1b3445f0565c5d85bb2">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
@@ -29,7 +29,7 @@
 	author="&author;"
 	version="&plgVersion;"
 	pluginURL="&pluginURL;"
-    min="6.7.0" 
+	min="6.7.0" 
 >
 
 <!--
@@ -190,6 +190,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2019-05-26
+- version 1.4a	: Fix bug in dependency version.
 ###2019-05-23
 - version 1.4	: Recompile of ProFTPd to work on unRAID 6.7. It probably will break compatibility for older versions.
 ###2018-02-05.1
