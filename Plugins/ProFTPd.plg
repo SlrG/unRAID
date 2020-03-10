@@ -5,15 +5,15 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2020.03.10">
+	<!ENTITY plgVersion			"2020.03.10.1">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
-	<!ENTITY controlFILE		"&name;-&author;-Control-1.6.tar.gz">
-	<!ENTITY controlMD5			"1f87a347815143e00a5cc589f8da64df">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.7.tar.gz">
+	<!ENTITY controlMD5			"13128a6871bae3f4a87aabdc4b1f6ba9">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
 	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
@@ -192,6 +192,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2020-03-10.1
+- version 1.5a	: Fix typo.
 ###2020-03-10
 - version 1.5	: Fix mount and unmount scripts not beeing run from flash.
 ###2019-05-26
