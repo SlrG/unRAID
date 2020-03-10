@@ -5,15 +5,15 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2019.05.26">
+	<!ENTITY plgVersion			"2020.03.10">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
-	<!ENTITY controlFILE		"&name;-&author;-Control-1.5.tar.gz">
-	<!ENTITY controlMD5			"f331458d4962b371c59f411e68162b2d">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.6.tar.gz">
+	<!ENTITY controlMD5			"1f87a347815143e00a5cc589f8da64df">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
 	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
@@ -59,11 +59,13 @@ ProFTPd-SlrG-Dependency-x.x.tar.gz	-> This holds the plugins dependency files
 ProFTPd.cfg							-> The config file used by the plugin
 README								-> This contains the instructions on how to use the plugin
 proftpd.conf						-> The config file used by proftpd
-mountscript.sh						-> This is used to mount directories on array start
-unmountscript.sh					-> This is used to unmoung directories on array stop
+mountscript.sh						-> This is the source used to mount directories on array start. Edit it to suit your needs.
+unmountscript.sh					-> This is the source used to unmount directories on array stop. Edit it to suit your needs.
 
 INSTALLED TO: /boot/config/plugins/ProFTPd/scripts
 rc.ProFTPd							-> This is the control file. The one that starts, stops, and installs the application
+mountscript.sh                      -> This will be executed on array start. Don't edit, the changes will be lost!
+unmountscript.sh                    -> This will be executed on array stop. Don't edit, the changes will be lost!
 
 INSTALLED TO: $Webroot (if set)
 ..									-> The proftpd config editor files
@@ -190,6 +192,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2020-03-10
+- version 1.5	: Fix mount and unmount scripts not beeing run from flash.
 ###2019-05-26
 - version 1.4a	: Fix bug in dependency version.
 ###2019-05-23
