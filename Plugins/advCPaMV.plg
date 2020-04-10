@@ -5,15 +5,15 @@
 	<!ENTITY displayName        "Advanced Copy and Move">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
-	<!ENTITY plgVersion         "2019.04.30">
+	<!ENTITY plgVersion         "2020.04.10">
 	<!ENTITY icon               "terminal">
-	<!ENTITY md5                "f59b1c2c985f1071fcbfeecf330c53ae">
+	<!ENTITY md5                "ae65d46e0cc225ba2109c7e836667d01">
 	<!ENTITY pld                "/boot/config/plugins">
 	<!ENTITY plg                "&pld;/&name;">
 	<!ENTITY epld               "/usr/local/emhttp/plugins/&name;">
 	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL          "&ghm;/Plugins/&name;.plg">
-	<!ENTITY supportURL         "https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v667-and-later/">
+	<!ENTITY supportURL         "https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v683-and-later/">
 ]>
 
 <PLUGIN
@@ -26,6 +26,13 @@
 >
 
 <CHANGES>
+###2020.04.10
+- fix numerical overflows (graphical, no data corruptions known)
+- fix RCE problem caused by du and find calls
+- fix du errors when source not available
+- fix progress info shown when nothing happend
+- fix empty progress info shown on moving files
+- add warranty disclaimer
 ###2019.04.30
 - change plugin display name
 ###2019.04.23.4
@@ -80,9 +87,10 @@ Great thanks go to Limetech for giving us unRAID.
                              **************
 
 This plugin provides advanced cp and mv shell command alternatives named
-gcp and gmv that were created by applying the advcpmv-0.7-8.25.patch
-(from here: https://github.com/atdt/advcpmv)
-on the coreutils version used by unRAID.
+gcp and gmv that were created by applying the advcpmv-0.9-8.31.patch
+from here: https://github.com/SlrG/advcpmv on the coreutils version used
+by unRAID. The Patch is a modified version of the one available here:
+https://github.com/jarun/advcpmv
 
 But what does it do?
 
@@ -102,6 +110,13 @@ temp/file2.txt                                       1.0 GiB /   1.0 GiB
 And afterwards it will show a summary of the copy process:
 
 5 files (  5.0 GiB) copied in 44.5 seconds (115.2 MiB/s).
+
+THIS SOFTWARE IS PROVIDED 'AS IS' AND WITHOUT ANY EXPRESSED OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHOR SHALL
+NOT BE HELD LIABLE FOR ANY DAMAGES RESULTING FROM THE USE OF THIS
+SOFTWARE, EITHER DIRECTLY OR INDIRECTLY, INCLUDING, BUT NOT LIMITED TO,
+LOSS OF DATA OR DATA BEING RENDERED INACCURATE.
 
 SlrG
 </INLINE>
@@ -126,7 +141,7 @@ SlrG
 	echo ""
 	echo "----------------------------------------------------"
 	echo " &name; has been installed."
-	echo " Copyright 2019, &author;"
+	echo " Copyright 2020, &author;"
 	echo " Version: &plgVersion;"
 	echo "----------------------------------------------------"
 	echo ""
@@ -144,7 +159,7 @@ SlrG
 	echo ""
 	echo "----------------------------------------------------"
 	echo " &name; has been removed."
-	echo " Copyright 2019, &author;"
+	echo " Copyright 2020, &author;"
 	echo " Version: &plgVersion;"
 	echo "----------------------------------------------------"
 	echo ""
