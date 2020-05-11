@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2020.03.10.1">
+	<!ENTITY plgVersion			"2020.05.10">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
@@ -18,8 +18,8 @@
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
 	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
-	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.7_x64.tar.gz">
-	<!ENTITY dependencyMD564	"0f72b8f09879a1b3445f0565c5d85bb2">
+	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.8_x64.tar.gz">
+	<!ENTITY dependencyMD564	"f60a71e94ec6899bd10ce83feabb6cca">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
@@ -29,7 +29,7 @@
 	author="&author;"
 	version="&plgVersion;"
 	pluginURL="&pluginURL;"
-	min="6.7.0" 
+	min="6.8.3" 
 >
 
 <!--
@@ -166,8 +166,8 @@ for further explanation.
 
 Bans, quotas, sftp, tls, sql users* and more may be possible. The proftpd
 included in my plugin was compiled with the following modules:
-  mod_auth.c          mod_quotatab.c
-  mod_auth_file.c     mod_quotatab_file.c
+  mod_auth.c          mod_quotatab_file.c
+  mod_auth_file.c     mod_quotatab_ldap.c
   mod_auth_unix.c     mod_quotatab_sql.c*
   mod_ban.c           mod_readme.c
   mod_cap.c           mod_rewrite.c
@@ -179,6 +179,7 @@ included in my plugin was compiled with the following modules:
   mod_ident.c         mod_sql_passwd.c*
   mod_log.c           mod_tls.c
   mod_ls.c            mod_xfer.c
+  mod_quotatab.c
 
 * only if sql package is installed
 
@@ -192,6 +193,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2020-05-10
+- version 1.6   : Bumped ProFTPd version for 64 bit systems to v1.3.7rc3, pushed openssl to unRAIDs version 1.1.1d, added some more features in build environment and made sure ncurses is found by make before building, so ftptop should work now. Removed deprecated IdentLookups directive from default conf and commented it in existing user configs. 
 ###2020-03-10.1
 - version 1.5a	: Fix typo.
 ###2020-03-10
@@ -277,7 +280,6 @@ MaxInstances            30
 
 # Speedup Login
 UseReverseDNS           off
-IdentLookups            off
 
 # Control Logging - comment and uncomment as needed
 # If logging Directory is world writeable the server won't start!
@@ -408,6 +410,7 @@ rmRecursiveNoWarn() {
 #Selfremoval commands
 echo "Executing selfremoval commands if present..."
 #rmNoWarn &plg;/filename; sed -i '/#srmtag00001/d' &pld;/&name;.plg		# Example for selfremoval commands
+sed -i '/^IdentLookups/ s/$/ \#This is deprecated and should be removed\!/' &pld;/&name;/proftpd.conf;sed -i '/^IdentLookups/ s/^/# /' &pld;/&name;/proftpd.conf;sed -i '/#srmtag00002/d' &pld;/&name;.plg		# Mark IdentLookups as deprecated
 
 # Verifies plugin control files if they exist, deletes if they are incorrect so new ones can be downloaded
 if [ -f "$CTRLFILES" ]; then
