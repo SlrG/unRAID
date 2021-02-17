@@ -8,7 +8,7 @@
 <Name>Advanced Copy and Move</Name>
 <Description>
 This plugin provides advanced cp and mv shell command alternatives named
-gcp and gmv. When using the -g or --progress-bar parameters they will
+cpg and mvg. When using the -g or --progress-bar parameters they will
 show the progress of the copy or move commands.
 </Description>
 <Support>https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v667-and-later/</Support>
