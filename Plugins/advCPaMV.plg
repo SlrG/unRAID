@@ -5,13 +5,13 @@
 	<!ENTITY displayName        "Advanced Copy and Move">
 	<!ENTITY author             "SlrG">
 	<!ENTITY authorName         "Michael Wehr">
-	<!ENTITY plgVersion         "2021.02.17">
+	<!ENTITY plgVersion         "2021.03.17">
 	<!ENTITY icon               "terminal">
-	<!ENTITY md5                "0476b4249cb0ff1abda9e6bf90698a55">
+	<!ENTITY md5                "c351f9da143c9876ec8abbb564d52130">
 	<!ENTITY pld                "/boot/config/plugins">
 	<!ENTITY plg                "&pld;/&name;">
 	<!ENTITY epld               "/usr/local/emhttp/plugins/&name;">
-	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/master">
+	<!ENTITY ghm                "https://github.com/&author;/unRAID/raw/opfix">
 	<!ENTITY pluginURL          "&ghm;/Plugins/&name;.plg">
 	<!ENTITY supportURL         "https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v683-and-later/">
 ]>
@@ -26,6 +26,10 @@
 >
 
 <CHANGES>
+###2021.03.17
+- apply progress bar patch on top of coreutils-8.32 of unraid 6.9.1
+- fix ownership and permission problems in package (thanks ljm42!) 
+- fix problem in uninstall script
 ###2021.02.17
 - renamed from gcp and gmv to cpg and mvg, if you have shell aliases
   you'll need to change them!
@@ -160,8 +164,8 @@ SlrG
 	<INLINE>
 	removepkg &plg;/&name;-&plgVersion;.txz
 	[ -d &plg; ] &amp;&amp; rm -rf &plg;
-	[ -f /usr/local/bin/gcp ] &amp;&amp; rm -f /usr/local/bin/gcp
-	[ -f /usr/local/bin/gmv ] &amp;&amp; rm -f /usr/local/bin/gmv
+	[ -f /usr/local/bin/cpg ] &amp;&amp; rm -f /usr/local/bin/cpg
+	[ -f /usr/local/bin/mvg ] &amp;&amp; rm -f /usr/local/bin/mvg
 	[ -d &epld; ] &amp;&amp; rm -rf &epld;
 	echo ""
 	echo "----------------------------------------------------"

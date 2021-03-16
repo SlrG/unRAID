@@ -10,7 +10,7 @@
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
-	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
+	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/opfix">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
 	<!ENTITY controlFILE		"&name;-&author;-Control-1.7.tar.gz">
 	<!ENTITY controlMD5			"13128a6871bae3f4a87aabdc4b1f6ba9">
