@@ -14,7 +14,7 @@ show the progress of the copy or move commands.
 <Support>https://forums.unraid.net/topic/79570-plugin-advanced-copy-and-move-for-unraid-v667-and-later/</Support>
 <Icon>https://github.com/SlrG/unRAID/raw/master/AppSupport/advCPaMV/advCPaMV.png</Icon>
 <IconFA>terminal</IconFA>
-<Project>https://github.com/atdt/advcpmv/</Project>
+<Project>https://github.com/jarun/advcpmv</Project>
 <DonateText>Support the plugin?</DonateText>
 <DonateLink>https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9TBZUM8QHDZAA&amp;source=url</DonateLink>
 <DonateImg>https://raw.githubusercontent.com/SlrG/unRAID/master/AppSupport/paypal.gif</DonateImg>
