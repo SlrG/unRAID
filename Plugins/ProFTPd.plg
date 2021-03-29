@@ -5,21 +5,21 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2020.03.10.1">
+	<!ENTITY plgVersion			"2021.03.29">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
 	<!ENTITY pid 				"/var/run/&name;/&name;.pid">
 	<!ENTITY ghm				"https://github.com/&author;/unRAID/raw/master">
 	<!ENTITY pluginURL			"&ghm;/Plugins/&name;.plg">
-	<!ENTITY controlFILE		"&name;-&author;-Control-1.7.tar.gz">
-	<!ENTITY controlMD5			"13128a6871bae3f4a87aabdc4b1f6ba9">
+	<!ENTITY controlFILE		"&name;-&author;-Control-1.8.tar.gz">
+	<!ENTITY controlMD5			"e1f1589e369696ca8ec52b34fe9b243a">
 	<!ENTITY controlURL			"&ghm;/AppSupport/&name;/&controlFILE;">
 	<!ENTITY dependencyFILE		"&name;-&author;-Dependency-1.1_x86.tar.gz">
 	<!ENTITY dependencyMD5		"faee89df5151607dbbb7a26005cd13b1">
 	<!ENTITY dependencyURL		"&ghm;/AppSupport/&name;/&dependencyFILE;">
-	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.7_x64.tar.gz">
-	<!ENTITY dependencyMD564	"0f72b8f09879a1b3445f0565c5d85bb2">
+	<!ENTITY dependencyFILE64	"&name;-&author;-Dependency-1.8_x64.tar.gz">
+	<!ENTITY dependencyMD564	"661e784ff3374312e72a747d9dc2de49">
 	<!ENTITY dependencyURL64	"&ghm;/AppSupport/&name;/&dependencyFILE64;">
 	<!ENTITY commonDIR			"/usr/local/&author;-Common">
 ]>
@@ -192,6 +192,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2021-03-29
+- version 1.6	: Bumped ProFTPd version for 64 bit systems to v1.3.7a and fixed some permission and ownership problems in packages (thanks ljm42!). 
 ###2020-03-10.1
 - version 1.5a	: Fix typo.
 ###2020-03-10
