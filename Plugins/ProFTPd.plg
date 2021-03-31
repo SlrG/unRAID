@@ -5,7 +5,7 @@
 	<!ENTITY displayName		"ProFTPd">
 	<!ENTITY author				"SlrG">
 	<!ENTITY authorName			"Michael Wehr">
-	<!ENTITY plgVersion			"2021.03.29">
+	<!ENTITY plgVersion			"2021.03.31">
 	<!ENTITY pld				"/boot/config/plugins">
 	<!ENTITY plg				"&pld;/&name;">
 	<!ENTITY pls				"/usr/local/emhttp/plugins/&name;/scripts">
@@ -192,6 +192,8 @@ SlrG
 </FILE>
 
 <CHANGES>
+###2021-03-31
+- version 1.6a	: Removed deprecated config directive from default configuration. (thanks kricker!)
 ###2021-03-29
 - version 1.6	: Bumped ProFTPd version for 64 bit systems to v1.3.7a and fixed some permission and ownership problems in packages (thanks ljm42!). 
 ###2020-03-10.1
@@ -410,6 +412,7 @@ rmRecursiveNoWarn() {
 #Selfremoval commands
 echo "Executing selfremoval commands if present..."
 #rmNoWarn &plg;/filename; sed -i '/#srmtag00001/d' &pld;/&name;.plg		# Example for selfremoval commands
+sed -i '/^IdentLookups/d' &plg;/proftpd.conf; sed -i '/#srmtag00002/d' &pld;/&name;.plg # remove deprecated configuration directive from existing configs
 
 # Verifies plugin control files if they exist, deletes if they are incorrect so new ones can be downloaded
 if [ -f "$CTRLFILES" ]; then
